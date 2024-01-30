@@ -19,7 +19,7 @@ public class CollectionManager {
             while(inputStr.isEmpty()) {
                 inputStr = scanner.nextLine();
             }
-            if("Q".equalsIgnoreCase(inputStr)){
+            if("Q".equals(inputStr)){
                 System.out.println("Collection Manager terminated.");
                 break;
             }
@@ -76,20 +76,23 @@ public class CollectionManager {
             System.out.println("Artist DOB: " + artistDob + " is invalid.");
             return;
         }
-        Genre genre = Genre.valueOf(parts[4].trim().toUpperCase());
-        if (genre == null) {
+        Genre genre;
+        try {
+            genre = Genre.valueOf(parts[4].trim().toUpperCase());
+        } catch (IllegalArgumentException e) {
             genre = Genre.UNKNOWN;
         }
         Date releaseDate = new Date(parts[5].trim());
         if (!releaseDate.isValid() || releaseDate.isFutureDate() || releaseDate.isBefore1900()) {
-            System.out.println("Date Released: " + artistDob + " is invalid.");
+            System.out.println("Date Released: " + releaseDate + " is invalid.");
             return;
         }
         Album newAlbum = new Album(title, new Artist(artistName, artistDob), genre, releaseDate);
-        if (!collection.add(newAlbum)) {
-            System.out.println(newAlbum + " is already in the collection.");
+        if (collection.contains(newAlbum)) {
+            System.out.println(title + "(" + artistName + ":" + artistDob + ") is already in the collection.");
         } else {
-            System.out.println(newAlbum + " added to the collection.");
+            collection.add(newAlbum);
+            System.out.println(title + "(" + artistName + ":" + artistDob + ") added to the collection.");
         }
     }
 
@@ -122,6 +125,7 @@ public class CollectionManager {
         }
         String title = parts[1].trim();
         String artistName = parts[2].trim();
+        Date artistDob = new Date(parts[3].trim());
         int rating;
         try {
             rating = Integer.parseInt(parts[4].trim());
@@ -133,7 +137,7 @@ public class CollectionManager {
             System.out.println("Invalid rating, rating scale is 1 to 5.");
             return;
         }
-        collection.rate(new Album(title, new Artist(artistName, null), null, null), rating);
+        collection.rate(new Album(title, new Artist(artistName, artistDob), null, null), rating);
     }
 
     public static void main(String[] args){

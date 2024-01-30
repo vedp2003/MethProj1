@@ -103,7 +103,17 @@ public class Album {
             return false;
         }
         Album album = (Album) obj;
-        return title.equalsIgnoreCase(album.title) && artist.equals(album.artist);
+        return title.equalsIgnoreCase(album.getTitle()) && artist.equals(album.getArtist());
+
+
+        /*
+        if(!(obj instanceof Album)){
+            return false;
+        }
+        Album album = (Album) obj;
+        return title.equalsIgnoreCase(album.getTitle()) && artist.equals(album.getArtist());
+
+         */
     }
 
     @Override
@@ -117,18 +127,16 @@ public class Album {
             current = current.getNext();
         }
         for(int i = 0; i < stars.length; i++){
-            if(stars[i] > 0){
                 ratingsString += "*".repeat(i + 1) + "(" + stars[i] + ")";
-            }
         }
         String result;
-        if(ratingsString.isEmpty()){
+        if(stars[0] == 0 && stars[1] == 0 && stars[2] == 0 && stars[3] == 0 && stars[4] == 0){
             result = "none";
         }
         else{
             result = ratingsString + "(average rating: " + avgRatings() + ")";
         }
-        return "[" + title + "] Released " + released + " [" + artist + "] [" + genre + "] Rating: " + ratingsString;
+        return "[" + title + "] Released " + released + " [" + artist.getName() + ":" +artist.getBorn() + "] [" + genre + "] Rating: " + result;
 
     }
 }

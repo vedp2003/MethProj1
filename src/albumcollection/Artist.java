@@ -5,7 +5,7 @@ public class Artist implements Comparable<Artist> {
     private Date born;
 
     public Artist(String name, Date born) {
-        this.name = name.toLowerCase();
+        this.name = name;
         this.born = born;
     }
 
@@ -32,10 +32,13 @@ public class Artist implements Comparable<Artist> {
             return nameComparison;
         }
         return this.born.compareTo(o.born);
+
+        //I NEVER USE THIS, is that fine - ASK
     }
 
     @Override
     public boolean equals(Object obj) {
+
         if(this == obj) {
             return true;
         }
@@ -43,7 +46,19 @@ public class Artist implements Comparable<Artist> {
             return false;
         }
         Artist artist = (Artist) obj;
-        return name.equalsIgnoreCase(artist.name) && born.equals(artist.born);
+        //return name.equalsIgnoreCase(artist.name) && born.equals(artist.born);
+        return name.equalsIgnoreCase(artist.name);
+
+
+        /*
+        if(!(obj instanceof Artist)){
+            return false;
+        }
+        Artist artist = (Artist) obj;
+        return (this.name.equals(artist.name) && this.born.equals(artist.born));
+
+         */
+
     }
 
     @Override

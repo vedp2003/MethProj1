@@ -7,7 +7,7 @@ public enum Genre {
     public String toString() {
         switch(this){
             case POP:
-            return "Pop";
+                return "Pop";
             case COUNTRY:
                 return "Country";
             case CLASSICAL:

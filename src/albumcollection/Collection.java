@@ -14,11 +14,13 @@ public class Collection {
     }
     private int find(Album album) {
         for(int i = 0; i < size; i++){
-            if(albums[i].equals(album)){
+            if(albums[i].equals(album) && albums[i].getArtist().getBorn().compareTo(album.getArtist().getBorn()) == 0){
                 return i;
             }
         }
         return NOT_FOUND;
+
+        //ASK THISS - Should find be if the whole album is equal or if only TITLE and ARTIST is equal
     }//helper method
     private void grow() {
         if(albums[albums.length - 1] != null){
@@ -64,11 +66,24 @@ public class Collection {
 
     }//false if the album doesn’t exist
     public void rate(Album album, int rating) {
-        int albumIndex = find(album);
+        int albumIndex = NOT_FOUND;
+
+        for(int i = 0; i < size; i++){
+            if(albums[i].getTitle().equalsIgnoreCase(album.getTitle()) && albums[i].getArtist().equals(album.getArtist())){
+                albumIndex = i;
+            }
+        }
+
         if(albumIndex != NOT_FOUND){
             albums[albumIndex].rate(rating);
-            System.out.println("You rate " + rating + " for " + album);
+            System.out.println("You rate " + rating + " for " + albums[albumIndex].getTitle() + ":" +albums[albumIndex].getReleased() + "(" + albums[albumIndex].getArtist().getName() + ")");
         }
+        else{
+            System.out.println(album.getTitle() + "(" + album.getArtist().getName() + ":" +album.getArtist().getBorn() + ") is not in the collection");
+
+        }
+
+        //ASK THISSS - when the rating album is not found (ex: Blue(April:1/11/2015) is not in the collection) , is 1/11/2015 the DOB or released Date??
     }
     public void printByDate() {
         if(size == 0) {
