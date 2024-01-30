@@ -5,7 +5,16 @@ public class Rating {
     private Rating next;
     public Rating(int star) {
         this.star = star;
-        this.next = next;
+        this.next = null;
+    }
+    public int getStar() {
+        return star;
+    }
+    public Rating getNext() {
+        return next;
     }
 
+    public void setNext(Rating next) {
+        this.next = next;
+    }
 }
