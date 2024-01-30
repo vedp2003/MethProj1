@@ -55,7 +55,7 @@ public class Artist implements Comparable<Artist> {
             return false;
         }
         Artist artist = (Artist) obj;
-        return (this.name.equals(artist.name) && this.born.equals(artist.born));
+        return (this.name.equals(artist.name);
 
          */
 
