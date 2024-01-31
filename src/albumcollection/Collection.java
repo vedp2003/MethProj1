@@ -141,19 +141,30 @@ public class Collection {
             System.out.println("Collection is empty!");
             return;
         }
-
-        //ASK do we need efficient sorting method - this is like O(n^2)
+//        //ved-
+//        //ASK do we need efficient sorting method - this is like O(n^2)
+//        for (int i = 0; i < size - 1; i++) {
+//            for (int j = 0; j < size - i - 1; j++) {
+//                if (albums[j].getReleased().compareTo(albums[j + 1].getReleased()) > 0 ||
+//                        (albums[j].getReleased().equals(albums[j + 1].getReleased()) &&
+//                                albums[j].getTitle().compareToIgnoreCase(albums[j + 1].getTitle()) > 0)) {
+//                    Album temp = albums[j];
+//                    albums[j] = albums[j + 1];
+//                    albums[j + 1] = temp;
+//                }
+//            }
+//        }
+        //gpt code
         for (int i = 0; i < size - 1; i++) {
             for (int j = 0; j < size - i - 1; j++) {
-                if (albums[j].getReleased().compareTo(albums[j + 1].getReleased()) > 0 ||
-                        (albums[j].getReleased().equals(albums[j + 1].getReleased()) &&
-                                albums[j].getTitle().compareToIgnoreCase(albums[j + 1].getTitle()) > 0)) {
+                if (compareAlbumsByDateAndTitle(albums[j], albums[j + 1]) > 0) {
                     Album temp = albums[j];
                     albums[j] = albums[j + 1];
                     albums[j + 1] = temp;
                 }
             }
         }
+
 
         System.out.println("* Collection sorted by Released Date/Title *");
 
@@ -165,9 +176,56 @@ public class Collection {
         System.out.println("* end of list *");
     }//sort by release date, then title
 
+    //gpt-
+    private int compareAlbumsByDateAndTitle(Album album1, Album album2) {
+        int dateComparison = album1.getReleased().compareTo(album2.getReleased());
+        if (dateComparison == 0) {
+            // If release dates are the same, compare by title and then by artist's name
+            int titleComparison = album1.getTitle().compareToIgnoreCase(album2.getTitle());
+            if (titleComparison == 0) {
+                return album1.getArtist().getName().compareToIgnoreCase(album2.getArtist().getName());
+            } else {
+                return titleComparison;
+            }
+        } else {
+            return dateComparison;
+        }
+    }
     /**
      * Displays all the albums in the collection sorted by genres, then artist's names, and then artist's date of births
      */
+    //ved-
+//    public void printByGenre() {
+//        if (size == 0) {
+//            System.out.println("Collection is empty!");
+//            return;
+//        }
+//
+//        for (int i = 0; i < size - 1; i++) {
+//            for (int j = 0; j < size - i - 1; j++) {
+//                if (albums[j].getGenre().compareTo(albums[j + 1].getGenre()) > 0 ||
+//                        (albums[j].getGenre().equals(albums[j + 1].getGenre()) &&
+//                                albums[j].getArtist().getName().compareToIgnoreCase(albums[j + 1].getArtist().getName()) > 0) ||
+//                                    (albums[j].getGenre().equals(albums[j + 1].getGenre()) &&
+//                                            albums[j].getArtist().getName().equalsIgnoreCase(albums[j + 1].getArtist().getName()) &&
+//                                                albums[j].getArtist().getBorn().compareTo(albums[j + 1].getArtist().getBorn()) > 0)) {
+//                    Album temp = albums[j];
+//                    albums[j] = albums[j + 1];
+//                    albums[j + 1] = temp;
+//                }
+//            }
+//        }
+//
+//        System.out.println("* Collection sorted by Genre/Artist *");
+//
+//        for(int i = 0; i < size; i++) {
+//            if (albums[i] != null) {
+//                System.out.println(albums[i]);
+//            }
+//        }
+//        System.out.println("* end of list *");
+//    }
+    //gpt-
     public void printByGenre() {
         if (size == 0) {
             System.out.println("Collection is empty!");
@@ -176,12 +234,20 @@ public class Collection {
 
         for (int i = 0; i < size - 1; i++) {
             for (int j = 0; j < size - i - 1; j++) {
-                if (albums[j].getGenre().compareTo(albums[j + 1].getGenre()) > 0 ||
-                        (albums[j].getGenre().equals(albums[j + 1].getGenre()) &&
-                                albums[j].getArtist().getName().compareToIgnoreCase(albums[j + 1].getArtist().getName()) > 0) ||
-                                    (albums[j].getGenre().equals(albums[j + 1].getGenre()) &&
-                                            albums[j].getArtist().getName().equalsIgnoreCase(albums[j + 1].getArtist().getName()) &&
-                                                albums[j].getArtist().getBorn().compareTo(albums[j + 1].getArtist().getBorn()) > 0)) {
+                int genreComparison = albums[j].getGenre().compareTo(albums[j + 1].getGenre());
+                int artistNameComparison = albums[j].getArtist().getName().compareToIgnoreCase(albums[j + 1].getArtist().getName());
+
+                // If genres are the same, compare artist names
+                if (genreComparison == 0) {
+                    // If artist names are the same, compare artist dates of birth
+                    int artistDobComparison = albums[j].getArtist().getBorn().compareTo(albums[j + 1].getArtist().getBorn());
+
+                    if (artistNameComparison > 0 || (artistNameComparison == 0 && artistDobComparison > 0)) {
+                        Album temp = albums[j];
+                        albums[j] = albums[j + 1];
+                        albums[j + 1] = temp;
+                    }
+                } else if (genreComparison > 0) {
                     Album temp = albums[j];
                     albums[j] = albums[j + 1];
                     albums[j + 1] = temp;
@@ -191,7 +257,7 @@ public class Collection {
 
         System.out.println("* Collection sorted by Genre/Artist *");
 
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             if (albums[i] != null) {
                 System.out.println(albums[i]);
             }
