@@ -1,5 +1,10 @@
 package albumcollection;
 
+/**
+ * This class defines the ADT Collection; an instance of Collection
+ * can hold a list of Album objects
+ * @author Ved Patel, Vivek Manthri
+ */
 public class Collection {
 
     private static final int INITIAL_CAPACITY = 4;
@@ -8,20 +13,31 @@ public class Collection {
     private Album[] albums; //list of albums
     private int size; //number of albums in the list
 
+    /**
+     * Default constructor/no-argument constructor
+     */
     public Collection(){
         albums = new Album[INITIAL_CAPACITY];
         size = 0;
     }
+
+    /**
+     * Helper method to find the index of a given album in the list of albums
+     * @param album the album to find in the list
+     * @return the integer index of the album; -1 if not found in the list
+     */
     private int find(Album album) {
         for(int i = 0; i < size; i++){
-            if(albums[i].equals(album) && albums[i].getArtist().getBorn().compareTo(album.getArtist().getBorn()) == 0){
+            if(albums[i].equals(album)){
                 return i;
             }
         }
         return NOT_FOUND;
+    }
 
-        //ASK THISS - Should find be if the whole album is equal or if only TITLE and ARTIST is equal
-    }//helper method
+    /**
+     * Helper method to increase the capacity of the albums list by 4
+     */
     private void grow() {
         if(albums[albums.length - 1] != null){
             Album[] growAlbum = new Album[albums.length + GROW_CAPACITY];
@@ -30,8 +46,13 @@ public class Collection {
             }
             albums = growAlbum;
         }
+    }
 
-    }//helper method to increase the capacity by 4
+    /**
+     * Checks if the list of albums contains a given album
+     * @param album the album to check
+     * @return true if album is in the list; false otherwise
+     */
     public boolean contains(Album album) {
         if(find(album) != NOT_FOUND){
             return true;
@@ -40,6 +61,12 @@ public class Collection {
             return false;
         }
     }
+
+    /**
+     * Adds a new album to the list of albums
+     * @param album the album to add
+     * @return true if the album is new and is added; false if it already exists
+     */
     public boolean add(Album album) {
         if(contains(album)){
             return false;
@@ -51,7 +78,13 @@ public class Collection {
         size++;
         return true;
 
-    }//false if the album exists
+    }
+
+    /**
+     * Removes an album from the list of albums
+     * @param album the album to remove
+     * @return true if the album is found and removed; false if it doesn't exist
+     */
     public boolean remove(Album album) {
         int albumIndex = find(album);
         if(albumIndex == NOT_FOUND){
@@ -65,8 +98,15 @@ public class Collection {
         return true;
 
 
-    }//false if the album doesn’t exist
+    }
+
+    /**
+     * Rates an album in the list and prints out corresponding message of the rating for the album
+     * @param album the album to rate
+     * @param rating the rating to assign
+     */
     public void rate(Album album, int rating) {
+        /*
         int albumIndex = NOT_FOUND;
 
         for(int i = 0; i < size; i++){
@@ -75,33 +115,44 @@ public class Collection {
             }
         }
 
+         */
+
+        int albumIndex = find(album);
         if(albumIndex != NOT_FOUND){
             albums[albumIndex].rate(rating);
-            System.out.println("You rate " + rating + " for " + albums[albumIndex].getTitle() + ":" +albums[albumIndex].getReleased() + "(" + albums[albumIndex].getArtist().getName() + ")");
+            System.out.println("You rate " + rating + " for " + albums[albumIndex].getTitle() + ":" +
+                    albums[albumIndex].getReleased() + "(" + albums[albumIndex].getArtist().getName() + ")");
         }
         else{
-            System.out.println(album.getTitle() + "(" + album.getArtist().getName() + ":" +album.getArtist().getBorn() + ") is not in the collection");
+            System.out.println(album.getTitle() + album.getArtist() + " is not in the collection");
 
         }
 
-        //ASK THISSS - when the rating album is not found (ex: Blue(April:1/11/2015) is not in the collection) , is 1/11/2015 the DOB or released Date??
     }
+
+    /**
+     * Displays all the albums in the collection sorted by release dates, and then titles
+     */
     public void printByDate() {
-        if(size == 0) {
+
+        //Printbydate, genre, and rating dont sort it properly - WE NEED TO FIX THESE 3 methods, everything else works pretty sure
+
+        if (size == 0) {
             System.out.println("Collection is empty!");
             return;
         }
 
-        for(int i = 1; i < size; i++) {
-            Album key = albums[i];
-            int j = i - 1;
-
-            while(j >= 0 && (albums[j].getReleased().compareTo(key.getReleased()) > 0 ||
-                    (albums[j].getReleased().equals(key.getReleased()) && albums[j].getTitle().compareToIgnoreCase(key.getTitle()) > 0))) {
-                albums[j + 1] = albums[j];
-                j = j - 1;
+        //ASK do we need efficient sorting method - this is like O(n^2)
+        for (int i = 0; i < size - 1; i++) {
+            for (int j = 0; j < size - i - 1; j++) {
+                if (albums[j].getReleased().compareTo(albums[j + 1].getReleased()) > 0 ||
+                        (albums[j].getReleased().equals(albums[j + 1].getReleased()) &&
+                                albums[j].getTitle().compareToIgnoreCase(albums[j + 1].getTitle()) > 0)) {
+                    Album temp = albums[j];
+                    albums[j] = albums[j + 1];
+                    albums[j + 1] = temp;
+                }
             }
-            albums[j + 1] = key;
         }
 
         System.out.println("* Collection sorted by Released Date/Title *");
@@ -114,22 +165,28 @@ public class Collection {
         System.out.println("* end of list *");
     }//sort by release date, then title
 
+    /**
+     * Displays all the albums in the collection sorted by genres, then artist's names, and then artist's date of births
+     */
     public void printByGenre() {
-        if(size == 0) {
+        if (size == 0) {
             System.out.println("Collection is empty!");
             return;
         }
 
-        for(int i = 1; i < size; i++) {
-            Album key = albums[i];
-            int j = i - 1;
-
-            while(j >= 0 && (albums[j].getGenre().compareTo(key.getGenre()) > 0 ||
-                    (albums[j].getGenre().equals(key.getGenre()) && albums[j].getArtist().getName().compareToIgnoreCase(key.getArtist().getName()) > 0))) {
-                albums[j + 1] = albums[j];
-                j = j - 1;
+        for (int i = 0; i < size - 1; i++) {
+            for (int j = 0; j < size - i - 1; j++) {
+                if (albums[j].getGenre().compareTo(albums[j + 1].getGenre()) > 0 ||
+                        (albums[j].getGenre().equals(albums[j + 1].getGenre()) &&
+                                albums[j].getArtist().getName().compareToIgnoreCase(albums[j + 1].getArtist().getName()) > 0) ||
+                                    (albums[j].getGenre().equals(albums[j + 1].getGenre()) &&
+                                            albums[j].getArtist().getName().equalsIgnoreCase(albums[j + 1].getArtist().getName()) &&
+                                                albums[j].getArtist().getBorn().compareTo(albums[j + 1].getArtist().getBorn()) > 0)) {
+                    Album temp = albums[j];
+                    albums[j] = albums[j + 1];
+                    albums[j + 1] = temp;
+                }
             }
-            albums[j + 1] = key;
         }
 
         System.out.println("* Collection sorted by Genre/Artist *");
@@ -140,24 +197,28 @@ public class Collection {
             }
         }
         System.out.println("* end of list *");
-    }//sort by genre, then artist
+    }
 
+    /**
+     * Displays all the albums in the collection sorted by average ratings, and then titles
+     */
     public void printByRating() {
-        if(size == 0) {
+        if (size == 0) {
             System.out.println("Collection is empty!");
             return;
         }
 
-        for(int i = 1; i < size; i++) {
-            Album key = albums[i];
-            int j = i - 1;
-
-            while(j >= 0 && (albums[j].avgRatings() < key.avgRatings() ||
-                    (albums[j].avgRatings() == key.avgRatings() && albums[j].getTitle().compareToIgnoreCase(key.getTitle()) > 0))) {
-                albums[j + 1] = albums[j];
-                j = j - 1;
+        // Sort by average rating, then title
+        for (int i = 0; i < size - 1; i++) {
+            for (int j = 0; j < size - i - 1; j++) {
+                if (albums[j].avgRatings() < albums[j + 1].avgRatings() ||
+                        (albums[j].avgRatings() == albums[j + 1].avgRatings() &&
+                            albums[j].getTitle().compareToIgnoreCase(albums[j + 1].getTitle()) > 0)) {
+                    Album temp = albums[j];
+                    albums[j] = albums[j + 1];
+                    albums[j + 1] = temp;
+                }
             }
-            albums[j + 1] = key;
         }
 
         System.out.println("* Collection sorted by Rating/Title *");
@@ -168,5 +229,5 @@ public class Collection {
             }
         }
         System.out.println("* end of list *");
-    }//sort by average rating, then title
+    }
 }
