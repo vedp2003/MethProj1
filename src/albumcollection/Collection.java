@@ -64,6 +64,7 @@ public class Collection {
         size--;
         return true;
 
+
     }//false if the album doesn’t exist
     public void rate(Album album, int rating) {
         int albumIndex = NOT_FOUND;
@@ -168,5 +169,4 @@ public class Collection {
         }
         System.out.println("* end of list *");
     }//sort by average rating, then title
-
 }

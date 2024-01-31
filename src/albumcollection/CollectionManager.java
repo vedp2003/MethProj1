@@ -98,23 +98,23 @@ public class CollectionManager {
 
     private void removeAlbum(String[] parts) {
         // Example input: D,Blue,April,1/11/2015
-        if (parts.length < 3) {
+
+
+        if (parts.length < 4) {
             System.out.println("Invalid command!");
             return;
         }
         String title = parts[1].trim();
         String artistName = parts[2].trim();
+        Date artistDob = new Date(parts[3].trim());
 
-        /*
-        if (!collection.remove(new Album(title, new Artist(artistName, null), null, null))) {
-            System.out.println(newAlbum + " is not in the collection");
+        Album albumToRemove = new Album(title, new Artist(artistName, artistDob), null, null);
+        if (collection.remove(albumToRemove)) {
+            System.out.println(title.toUpperCase() + "(" + artistName + ":" + artistDob + ") removed from the collection.");
         } else {
-            System.out.println(newAlbum + " removed from the collection.");
+            System.out.println(title + "(" + artistName + ":" + artistDob + ") is not in the collection");
         }
-         */
 
-
-        //this doesnt even remove the Album - CHECK METHOD
     }
 
     private void rateAlbum(String[] parts) {
@@ -144,5 +144,4 @@ public class CollectionManager {
         CollectionManager manager = new CollectionManager();
         manager.run();
     }
-
 }

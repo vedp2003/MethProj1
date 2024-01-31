@@ -95,6 +95,8 @@ public class Date implements Comparable<Date> {
     }
 
     public static void main(String[] args) {
-
+        String s = args[0];
+        Date date = new Date(s);
+        System.out.println(date.isValid());
     }
 }
