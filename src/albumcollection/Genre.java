@@ -5,7 +5,7 @@ package albumcollection;
  * @author Ved Patel, Vivek Manthri
  */
 public enum Genre {
-    POP, COUNTRY, CLASSICAL, JAZZ, UNKNOWN;
+    CLASSICAL, COUNTRY, JAZZ, POP, UNKNOWN;
 
     /**
      * Returns a user-friendly string representation of the music album genre
