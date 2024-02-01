@@ -188,7 +188,6 @@ public class Collection {
             for (int j = 0; j < size - i - 1; j++) {
 
                 if (compareByGenreArtistDOB(albums[j], albums[j + 1]) == 1) {
-                    // Swap albums[j+1] and albums[j]
                     Album temp = albums[j];
                     albums[j] = albums[j + 1];
                     albums[j + 1] = temp;
@@ -214,7 +213,6 @@ public class Collection {
         int artistComparison = a1.getArtist().compareTo(a2.getArtist());
         if (artistComparison == 1) return 1;
         if (artistComparison == -1) return -1;
-
 
         return a1.getArtist().compareTo(a2.getArtist());
     }
