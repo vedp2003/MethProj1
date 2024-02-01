@@ -200,7 +200,91 @@ public class Collection {
 //        }
 //        System.out.println("* end of list *");
 //    }
-    //gpt-
+    //vivek gpt-
+//    public void printByGenre() {
+//        if (size == 0) {
+//            System.out.println("Collection is empty!");
+//            return;
+//        }
+//
+//        for (int i = 0; i < size - 1; i++) {
+//            for (int j = 0; j < size - i - 1; j++) {
+//                int genreComparison = albums[j].getGenre().compareTo(albums[j + 1].getGenre());
+//                int artistNameComparison = albums[j].getArtist().getName().compareToIgnoreCase(albums[j + 1].getArtist().getName());
+//
+//                // If genres are the same, compare artist names
+//                if (genreComparison == 0) {
+//                    // If artist names are the same, compare artist dates of birth
+//                    int artistDobComparison = albums[j].getArtist().getBorn().compareTo(albums[j + 1].getArtist().getBorn());
+//
+//                    if (artistNameComparison > 0 || (artistNameComparison == 0 && artistDobComparison > 0)) {
+//                        Album temp = albums[j];
+//                        albums[j] = albums[j + 1];
+//                        albums[j + 1] = temp;
+//                    }
+//                } else if (genreComparison > 0) {
+//                    Album temp = albums[j];
+//                    albums[j] = albums[j + 1];
+//                    albums[j + 1] = temp;
+//                }
+//            }
+//        }
+//
+//        System.out.println("* Collection sorted by Genre/Artist *");
+//
+//        for (int i = 0; i < size; i++) {
+//            if (albums[i] != null) {
+//                System.out.println(albums[i]);
+//            }
+//        }
+//        System.out.println("* end of list *");
+//    }
+    //ved gpt-
+//    public void printByGenre() {
+//        if (size == 0) {
+//            System.out.println("Collection is empty!");
+//            return;
+//        }
+//
+//        for (int i = 0; i < size - 1; i++) {
+//            for (int j = 0; j < size - i - 1; j++) {
+//                if (needsSwapByGenre(albums[j], albums[j + 1])) {
+//                    Album temp = albums[j];
+//                    albums[j] = albums[j + 1];
+//                    albums[j + 1] = temp;
+//                }
+//            }
+//        }
+//
+//        System.out.println("* Collection sorted by Genre/Artist ");
+//        for(int i = 0; i < size; i++) {
+//            if (albums[i] != null) {
+//                System.out.println(albums[i]);
+//            }
+//        }
+//        System.out.println(" end of list *");
+//
+//    }
+//
+//    private boolean needsSwapByGenre(Album album1, Album album2) {
+//        int genreComparison = album1.getGenre().compareTo(album2.getGenre());
+//        if (genreComparison > 0) {
+//            return true;
+//        } else if (genreComparison < 0) {
+//            return false;
+//        }
+//
+//        int artistNameComparison = album1.getArtist().getName().compareToIgnoreCase(album2.getArtist().getName());
+//        if (artistNameComparison > 0) {
+//            return true;
+//        } else if (artistNameComparison < 0) {
+//            return false;
+//        }
+//
+//        return album1.getArtist().getBorn().compareTo(album2.getArtist().getBorn()) > 0;
+//    }
+
+    //more ved gpt-
     public void printByGenre() {
         if (size == 0) {
             System.out.println("Collection is empty!");
@@ -209,20 +293,7 @@ public class Collection {
 
         for (int i = 0; i < size - 1; i++) {
             for (int j = 0; j < size - i - 1; j++) {
-                int genreComparison = albums[j].getGenre().compareTo(albums[j + 1].getGenre());
-                int artistNameComparison = albums[j].getArtist().getName().compareToIgnoreCase(albums[j + 1].getArtist().getName());
-
-                // If genres are the same, compare artist names
-                if (genreComparison == 0) {
-                    // If artist names are the same, compare artist dates of birth
-                    int artistDobComparison = albums[j].getArtist().getBorn().compareTo(albums[j + 1].getArtist().getBorn());
-
-                    if (artistNameComparison > 0 || (artistNameComparison == 0 && artistDobComparison > 0)) {
-                        Album temp = albums[j];
-                        albums[j] = albums[j + 1];
-                        albums[j + 1] = temp;
-                    }
-                } else if (genreComparison > 0) {
+                if (shouldSwap(albums[j], albums[j + 1])) {
                     Album temp = albums[j];
                     albums[j] = albums[j + 1];
                     albums[j + 1] = temp;
@@ -230,15 +301,24 @@ public class Collection {
             }
         }
 
-        System.out.println("* Collection sorted by Genre/Artist *");
-
+        System.out.println("* Collection sorted by Genre/Artist ");
         for (int i = 0; i < size; i++) {
             if (albums[i] != null) {
                 System.out.println(albums[i]);
             }
         }
-        System.out.println("* end of list *");
+        System.out.println(" end of list *");
     }
+
+    private boolean shouldSwap(Album a1, Album a2) {
+        int genreComparison = a1.getGenre().compareTo(a2.getGenre());
+        if (genreComparison > 0) return true;
+        if (genreComparison < 0) return false;
+
+        int artistComparison = a1.getArtist().compareTo(a2.getArtist());
+        return artistComparison > 0;
+    }
+
 
     /**
      * Displays all the albums in the collection sorted by average ratings, and then titles
