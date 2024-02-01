@@ -227,7 +227,6 @@ public class Collection {
             return;
         }
 
-        // Sort by average rating, then title
         for (int i = 0; i < size - 1; i++) {
             for (int j = 0; j < size - i - 1; j++) {
                 if (albums[j].avgRatings() < albums[j + 1].avgRatings() ||
