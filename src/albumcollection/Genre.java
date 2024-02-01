@@ -13,9 +13,6 @@ public enum Genre {
      */
     @Override
     public String toString() {
-
-        //DO we need to ovverride this - idk if this is right for this enum class
-
         switch(this){
             case POP:
                 return "Pop";
@@ -31,5 +28,4 @@ public enum Genre {
                 throw new IllegalArgumentException();
         }
     }
-
 }

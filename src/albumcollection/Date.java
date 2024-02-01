@@ -108,10 +108,9 @@ public class Date implements Comparable<Date> {
         int currentMonth = cal.get(Calendar.MONTH) + 1;
         int currentDay = cal.get(Calendar.DAY_OF_MONTH);
 
-        return (year > currentYear) ||
-                (year == currentYear && month > currentMonth) ||
+        return (year > currentYear) || (year == currentYear && month > currentMonth) ||
                 (year == currentYear && month == currentMonth && day > currentDay) ||
-                ((year == currentYear && month == currentMonth && day == currentDay));
+                    ((year == currentYear && month == currentMonth && day == currentDay));
 
     }
 
@@ -130,11 +129,14 @@ public class Date implements Comparable<Date> {
      */
     @Override
     public int compareTo(Date o) {
-        if(this.year != o.year) return this.year - o.year;
+        if (this.year != o.year)
+            return this.year - o.year;
         else {
-            if(this.month != o.month) return this.month - o.month;
-            else{
-                if(this.day != o.day) return this.day - o.day;
+            if (this.month != o.month)
+                return this.month - o.month;
+            else {
+                if(this.day != o.day)
+                    return this.day - o.day;
             }
         }
         return 0;

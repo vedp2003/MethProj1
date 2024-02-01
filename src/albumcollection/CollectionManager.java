@@ -40,14 +40,14 @@ public class CollectionManager {
     public void run(){
         System.out.println("Collection Manager is up running.");
         String inputStr;
-        while(true){
+        while (true) {
             inputStr = scanner.nextLine().trim();
 
-            while(inputStr.isEmpty()) {
+            while (inputStr.isEmpty()) {
                 inputStr = scanner.nextLine();
             }
 
-            if("Q".equals(inputStr)){
+            if ("Q".equals(inputStr)) {
                 System.out.println("Collection Manager terminated.");
                 break;
             }
@@ -61,11 +61,11 @@ public class CollectionManager {
      */
     private void processInputs(String input){
         String[] strSplit = input.split(",");
-        if(strSplit.length == 0){
+        if (strSplit.length == 0) {
             return;
         }
         String commandName = strSplit[CMD_NAME_INDEX].trim();
-        switch (commandName){
+        switch (commandName) {
             case "A":
                 addAlbum(strSplit);
                 break;
@@ -97,11 +97,6 @@ public class CollectionManager {
      *              from the command line argument
      */
     private void addAlbum(String[] parts) {
-        // Example input: A,Fearless,Taylor Swift,12/13/1989,pop,11/8/2008
-
-        //FOR the A, D, and R commands, the only way they are invalid is if the length is less right?
-        //DO WE NEED TO trim() everytime - check this
-
         if (parts.length < ADD_INPUT_MAX) {
             System.out.println("Invalid command!");
             return;
@@ -126,10 +121,10 @@ public class CollectionManager {
         }
         Artist newArtist = new Artist(artistName, artistDob);
         Album newAlbum = new Album(title, newArtist, genre, releaseDate);
-
         if (collection.add(newAlbum)) {
             System.out.println(title + newArtist + " added to the collection.");
-        } else {
+        }
+        else {
             System.out.println(title + newArtist + " is already in the collection.");
         }
     }
@@ -141,8 +136,6 @@ public class CollectionManager {
      *              from the command line argument
      */
     private void removeAlbum(String[] parts) {
-        // Example input: D,Blue,April,1/11/2015
-
         if (parts.length < REMOVE_INPUT_MAX) {
             System.out.println("Invalid command!");
             return;
@@ -168,7 +161,6 @@ public class CollectionManager {
      *              from the command line argument
      */
     private void rateAlbum(String[] parts) {
-        // Example input: R,Fearless,Taylor Swift,12/13/1989,5
         if (parts.length < RATE_INPUT_MAX) {
             System.out.println("Invalid command!");
             return;
@@ -179,7 +171,8 @@ public class CollectionManager {
         int rating;
         try {
             rating = Integer.parseInt(parts[RATING_INDEX].trim());
-        } catch (NumberFormatException e) {
+        }
+        catch (NumberFormatException e) {
             System.out.println("Invalid rating, rating scale is 1 to 5.");
             return;
         }

@@ -43,7 +43,6 @@ public class Album {
      * @return the title of the album
      */
     public String getTitle() {
-
         return title;
     }
 
@@ -52,7 +51,6 @@ public class Album {
      * @return the artist of the album
      */
     public Artist getArtist() {
-
         return artist;
     }
 
@@ -77,7 +75,7 @@ public class Album {
      * @param star the star rating to add
      */
     public void rate(int star) {
-        if(ratings == null) {
+        if (ratings == null) {
             ratings = new Rating(star);
         }
         else {
@@ -94,20 +92,18 @@ public class Album {
      * @return a double representing the average rating or 0.0 if there are no ratings
      */
     public double avgRatings() {
-        //ASKKKK - should we round to 2 decimals as in the input output test cases??
-
-        if(ratings == null){
+        if (ratings == null) {
             return 0.00;
         }
         int counter = 0;
         int total = 0;
         Rating current = ratings;
-        while(current != null){
+        while (current != null) {
             total += current.getStar();
             counter++;
             current = current.getNext();
         }
-        if(counter == 0){
+        if (counter == 0) {
             return 0.00;
         }
         return (double) total / counter;
@@ -120,13 +116,11 @@ public class Album {
      */
     @Override
     public boolean equals(Object obj) {
-
         if (obj instanceof Album) {
             Album album = (Album) obj;
             return this.title.equalsIgnoreCase(album.getTitle()) && this.artist.equals(album.getArtist());
         }
         return false;
-
     }
 
     /**
@@ -139,25 +133,24 @@ public class Album {
         String ratingsString = "";
         int[] stars = new int[MAX_STAR];
         Rating current = ratings;
-        while(current != null){
+        while (current != null) {
             stars[current.getStar() - 1]++;
             current = current.getNext();
-            //CHECK THIS - getNext() goes to Rating class but getNext will always just return a null; so why does this work
         }
-        for(int i = 0; i < stars.length; i++){
+        for (int i = 0; i < stars.length; i++) {
                 ratingsString += "*".repeat(i + 1) + "(" + stars[i] + ")";
         }
         String result;
         boolean starsZeroChecker = false;
-        for(int i = 0; i < MAX_STAR; i++){
+        for (int i = 0; i < MAX_STAR; i++) {
             if(stars[i] != 0){
                 starsZeroChecker = true;
             }
         }
-        if(!starsZeroChecker){
+        if (!starsZeroChecker) {
             result = "none";
         }
-        else{
+        else {
             result = ratingsString + "(average rating: " + String.format("%.2f", avgRatings()) + ")";
 
         }

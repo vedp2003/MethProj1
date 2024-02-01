@@ -42,7 +42,6 @@ public class Artist implements Comparable<Artist> {
     @Override
     public int compareTo(Artist o) {
 
-
         /*
         int nameComparison = this.name.compareToIgnoreCase(o.name);
         if(nameComparison != 0) {
@@ -60,15 +59,19 @@ public class Artist implements Comparable<Artist> {
         int nameComparison = this.name.compareToIgnoreCase(o.name);
         if (nameComparison > 0) {
             return 1;
-        } else if (nameComparison < 0) {
+        }
+        else if (nameComparison < 0) {
             return -1;
-        } else {
+        }
+        else {
             int dateComparison = this.born.compareTo(o.born);
             if (dateComparison > 0) {
                 return 1;
-            } else if (dateComparison < 0) {
+            }
+            else if (dateComparison < 0) {
                 return -1;
-            } else {
+            }
+            else {
                 return 0;
             }
         }
@@ -82,13 +85,11 @@ public class Artist implements Comparable<Artist> {
      */
     @Override
     public boolean equals(Object obj) {
-
         if (obj instanceof Artist) {
             Artist artist = (Artist) obj;
             return this.name.equalsIgnoreCase(artist.name) && this.born.compareTo(artist.born) == 0;
         }
         return false;
-
     }
 
     /**

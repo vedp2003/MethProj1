@@ -27,8 +27,8 @@ public class Collection {
      * @return the integer index of the album; -1 if not found in the list
      */
     private int find(Album album) {
-        for(int i = 0; i < size; i++){
-            if(albums[i].equals(album)){
+        for (int i = 0; i < size; i++) {
+            if (albums[i].equals(album)) {
                 return i;
             }
         }
@@ -39,9 +39,9 @@ public class Collection {
      * Helper method to increase the capacity of the albums list by 4
      */
     private void grow() {
-        if(albums[albums.length - 1] != null){
+        if (albums[albums.length - 1] != null) {
             Album[] growAlbum = new Album[albums.length + GROW_CAPACITY];
-            for(int i = 0; i < albums.length; i++) {
+            for (int i = 0; i < albums.length; i++) {
                 growAlbum[i] = albums[i];
             }
             albums = growAlbum;
@@ -54,7 +54,7 @@ public class Collection {
      * @return true if album is in the list; false otherwise
      */
     public boolean contains(Album album) {
-        if(find(album) != NOT_FOUND){
+        if (find(album) != NOT_FOUND) {
             return true;
         }
         else{
@@ -68,16 +68,15 @@ public class Collection {
      * @return true if the album is new and is added; false if it already exists
      */
     public boolean add(Album album) {
-        if(contains(album)){
+        if (contains(album)) {
             return false;
         }
-        if(size == albums.length){
+        if (size == albums.length) {
             grow();
         }
         albums[size] = album;
         size++;
         return true;
-
     }
 
     /**
@@ -87,16 +86,15 @@ public class Collection {
      */
     public boolean remove(Album album) {
         int albumIndex = find(album);
-        if(albumIndex == NOT_FOUND){
+        if (albumIndex == NOT_FOUND) {
             return false;
         }
         albums[albumIndex] = null;
-        for(int i = albumIndex; i < size - 1; i++){
+        for (int i = albumIndex; i < size - 1; i++) {
             albums[i] = albums[i + 1];
         }
         size--;
         return true;
-
     }
 
     /**
@@ -107,12 +105,12 @@ public class Collection {
     public void rate(Album album, int rating) {
 
         int albumIndex = find(album);
-        if(albumIndex != NOT_FOUND){
+        if (albumIndex != NOT_FOUND) {
             albums[albumIndex].rate(rating);
             System.out.println("You rate " + rating + " for " + albums[albumIndex].getTitle() + ":" +
                     albums[albumIndex].getReleased() + "(" + albums[albumIndex].getArtist().getName() + ")");
         }
-        else{
+        else {
             System.out.println(album.getTitle() + album.getArtist() + " is not in the collection");
 
         }
@@ -123,7 +121,6 @@ public class Collection {
      * Displays all the albums in the collection sorted by release dates, and then titles
      */
     public void printByDate() {
-
         if (size == 0) {
             System.out.println("Collection is empty!");
             return;
@@ -131,13 +128,12 @@ public class Collection {
 
         for (int i = 0; i < size - 1; i++) {
             for (int j = 0; j < size - i - 1; j++) {
-                //if (compareAlbumsByDateAndTitle(albums[j], albums[j + 1]) > 0) {
                 if ((albums[j].getReleased().compareTo(albums[j + 1].getReleased()) > 0)
                         || (albums[j].getReleased().compareTo(albums[j + 1].getReleased()) == 0
-                        && albums[j].getTitle().compareToIgnoreCase(albums[j + 1].getTitle()) > 0)
-                        || (albums[j].getReleased().compareTo(albums[j + 1].getReleased()) == 0
-                        && albums[j].getTitle().compareToIgnoreCase(albums[j + 1].getTitle()) == 0
-                        && albums[j].getArtist().getName().compareToIgnoreCase(albums[j + 1].getArtist().getName()) > 0)) {
+                            && albums[j].getTitle().compareToIgnoreCase(albums[j + 1].getTitle()) > 0)
+                                || (albums[j].getReleased().compareTo(albums[j + 1].getReleased()) == 0
+                                    && albums[j].getTitle().compareToIgnoreCase(albums[j + 1].getTitle()) == 0
+                                        && albums[j].getArtist().getName().compareToIgnoreCase(albums[j + 1].getArtist().getName()) > 0)) {
 
                     Album temp = albums[j];
                     albums[j] = albums[j + 1];
@@ -148,7 +144,7 @@ public class Collection {
 
         System.out.println("* Collection sorted by Released Date/Title *");
 
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             if (albums[i] != null) {
                 System.out.println(albums[i]);
             }
@@ -171,8 +167,6 @@ public class Collection {
 
         for (int i = 0; i < size - 1; i++) {
             for (int j = 0; j < size - i - 1; j++) {
-
-                //if (compareByGenreArtistDOB(albums[j], albums[j + 1]) == 1) {
                 if ((albums[j].getGenre().toString().compareToIgnoreCase(albums[j + 1].getGenre().toString()) > 0)
                     || ((albums[j].getGenre().toString().compareToIgnoreCase(albums[j + 1].getGenre().toString()) == 0 &&
                         albums[j].getArtist().compareTo(albums[j + 1].getArtist()) == 1))) {

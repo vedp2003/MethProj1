@@ -14,9 +14,6 @@ public class Rating {
      */
     public Rating(int star) {
         this.star = star;
-        this.next = null;
-
-        //CONFIRM THIS - do we need to have Rating next inside this constructor?
     }
 
     /**
@@ -33,8 +30,6 @@ public class Rating {
      */
     public Rating getNext() {
         return next;
-
-        //WHY IS this working. This just returns null everytime??
     }
 
     /**
