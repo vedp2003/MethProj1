@@ -210,10 +210,6 @@ public class Collection {
         if (genreComparison > 0) return 1;
         if (genreComparison < 0) return -1;
 
-        int artistComparison = a1.getArtist().compareTo(a2.getArtist());
-        if (artistComparison == 1) return 1;
-        if (artistComparison == -1) return -1;
-
         return a1.getArtist().compareTo(a2.getArtist());
     }
 
