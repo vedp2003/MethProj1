@@ -78,7 +78,6 @@ public class Date implements Comparable<Date> {
      */
     public boolean isValid() {
 
-        //CHANGE THIS LOGIC UP
         //ALSO ask if isValid should include isTodayOrFutureDate and isBefore1900 inside it
         // (such as when we have to test isValid in the testbed main()
 
