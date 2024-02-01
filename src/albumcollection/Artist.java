@@ -42,18 +42,18 @@ public class Artist implements Comparable<Artist> {
     @Override
     public int compareTo(Artist o) {
 
-        /*
+
         int nameComparison = this.name.compareToIgnoreCase(o.name);
         if(nameComparison != 0) {
             return nameComparison;
         }
         return this.born.compareTo(o.born);
 
-         */
 
 
         //DO THESE -1, 1, 0 need to be made into constants to avoid magic numbers??
 
+        /*
         int nameComparison = this.name.compareToIgnoreCase(o.name);
         if (nameComparison > 0) {
             return 1;
@@ -69,6 +69,8 @@ public class Artist implements Comparable<Artist> {
                 return 0;
             }
         }
+
+         */
     }
 
     /**
