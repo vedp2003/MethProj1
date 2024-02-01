@@ -129,10 +129,16 @@ public class Collection {
             return;
         }
 
-        //gpt code
         for (int i = 0; i < size - 1; i++) {
             for (int j = 0; j < size - i - 1; j++) {
-                if (compareAlbumsByDateAndTitle(albums[j], albums[j + 1]) > 0) {
+                //if (compareAlbumsByDateAndTitle(albums[j], albums[j + 1]) > 0) {
+                if ((albums[j].getReleased().compareTo(albums[j + 1].getReleased()) > 0)
+                        || (albums[j].getReleased().compareTo(albums[j + 1].getReleased()) == 0
+                        && albums[j].getTitle().compareToIgnoreCase(albums[j + 1].getTitle()) > 0)
+                        || (albums[j].getReleased().compareTo(albums[j + 1].getReleased()) == 0
+                        && albums[j].getTitle().compareToIgnoreCase(albums[j + 1].getTitle()) == 0
+                        && albums[j].getArtist().getName().compareToIgnoreCase(albums[j + 1].getArtist().getName()) > 0)) {
+
                     Album temp = albums[j];
                     albums[j] = albums[j + 1];
                     albums[j + 1] = temp;
@@ -150,6 +156,7 @@ public class Collection {
         System.out.println("* end of list *");
     }//sort by release date, then title
 
+    /*
     private int compareAlbumsByDateAndTitle(Album album1, Album album2) {
         int dateComparison = album1.getReleased().compareTo(album2.getReleased());
         if (dateComparison == 0) {
@@ -163,6 +170,8 @@ public class Collection {
             return dateComparison;
         }
     }
+
+     */
 
     /**
      * Displays all the albums in the collection sorted by genres, then artist's names, and then artist's date of births
