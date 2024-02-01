@@ -170,6 +170,7 @@ public class Collection {
      * Displays all the albums in the collection sorted by genres, then artist's names, and then artist's date of births
      */
     public void printByGenre() {
+
         if (size == 0) {
             System.out.println("Collection is empty!");
             return;
@@ -177,8 +178,15 @@ public class Collection {
 
         //Implement sorting algorithm here
         //Sort by genre, then artist's names, and then artist's date of births
+
+        for (int i = 0; i < size; i++) {
+
+            System.out.println("G1: " + albums[i].getGenre());
+        }
+
         for (int i = 0; i < size - 1; i++) {
             for (int j = 0; j < size - i - 1; j++) {
+
                 if (compareByGenreArtistDOB(albums[j], albums[j + 1]) == 1) {
                     // Swap albums[j+1] and albums[j]
                     Album temp = albums[j];
@@ -198,15 +206,17 @@ public class Collection {
     }
 
     private int compareByGenreArtistDOB(Album a1, Album a2) {
-        int genreComparison = a1.getGenre().compareTo(a2.getGenre());
-        if (genreComparison == 1) return 1;
-        if (genreComparison == -1) return -1;
+        int genreComparison = a1.getGenre().toString().compareTo(a2.getGenre().toString());
+
+        if (genreComparison > 0) return 1;
+        if (genreComparison < 0) return -1;
 
         int artistComparison = a1.getArtist().compareTo(a2.getArtist());
         if (artistComparison == 1) return 1;
         if (artistComparison == -1) return -1;
 
-        return a1.getArtist().getBorn().compareTo(a2.getArtist().getBorn());
+
+        return a1.getArtist().compareTo(a2.getArtist());
     }
 
     /**
