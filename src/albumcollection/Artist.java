@@ -69,7 +69,6 @@ public class Artist implements Comparable<Artist> {
                 return 0;
             }
         }
-
     }
 
     /**
@@ -79,19 +78,6 @@ public class Artist implements Comparable<Artist> {
      */
     @Override
     public boolean equals(Object obj) {
-
-        /*
-        if(this == obj) {
-            return true;
-        }
-        if(obj == null || getClass() != obj.getClass()) {
-            return false;
-        }
-        Artist artist = (Artist) obj;
-        //return name.equalsIgnoreCase(artist.name) && born.equals(artist.born);
-        return name.equalsIgnoreCase(artist.name);
-
-         */
 
         if (obj instanceof Artist) {
             Artist artist = (Artist) obj;

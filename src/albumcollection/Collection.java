@@ -97,7 +97,6 @@ public class Collection {
         size--;
         return true;
 
-
     }
 
     /**
@@ -106,16 +105,6 @@ public class Collection {
      * @param rating the rating to assign
      */
     public void rate(Album album, int rating) {
-        /*
-        int albumIndex = NOT_FOUND;
-
-        for(int i = 0; i < size; i++){
-            if(albums[i].getTitle().equalsIgnoreCase(album.getTitle()) && albums[i].getArtist().equals(album.getArtist())){
-                albumIndex = i;
-            }
-        }
-
-         */
 
         int albumIndex = find(album);
         if(albumIndex != NOT_FOUND){
@@ -135,25 +124,11 @@ public class Collection {
      */
     public void printByDate() {
 
-        //Printbydate, genre, and rating dont sort it properly - WE NEED TO FIX THESE 3 methods, everything else works pretty sure
-
         if (size == 0) {
             System.out.println("Collection is empty!");
             return;
         }
-//        //ved-
-//        //ASK do we need efficient sorting method - this is like O(n^2)
-//        for (int i = 0; i < size - 1; i++) {
-//            for (int j = 0; j < size - i - 1; j++) {
-//                if (albums[j].getReleased().compareTo(albums[j + 1].getReleased()) > 0 ||
-//                        (albums[j].getReleased().equals(albums[j + 1].getReleased()) &&
-//                                albums[j].getTitle().compareToIgnoreCase(albums[j + 1].getTitle()) > 0)) {
-//                    Album temp = albums[j];
-//                    albums[j] = albums[j + 1];
-//                    albums[j + 1] = temp;
-//                }
-//            }
-//        }
+
         //gpt code
         for (int i = 0; i < size - 1; i++) {
             for (int j = 0; j < size - i - 1; j++) {
@@ -164,7 +139,6 @@ public class Collection {
                 }
             }
         }
-
 
         System.out.println("* Collection sorted by Released Date/Title *");
 
@@ -191,89 +165,22 @@ public class Collection {
             return dateComparison;
         }
     }
+
     /**
      * Displays all the albums in the collection sorted by genres, then artist's names, and then artist's date of births
      */
-    //ved-
-//    public void printByGenre() {
-//        if (size == 0) {
-//            System.out.println("Collection is empty!");
-//            return;
-//        }
-//
-//        for (int i = 0; i < size - 1; i++) {
-//            for (int j = 0; j < size - i - 1; j++) {
-//                if (albums[j].getGenre().compareTo(albums[j + 1].getGenre()) > 0 ||
-//                        (albums[j].getGenre().equals(albums[j + 1].getGenre()) &&
-//                                albums[j].getArtist().getName().compareToIgnoreCase(albums[j + 1].getArtist().getName()) > 0) ||
-//                                    (albums[j].getGenre().equals(albums[j + 1].getGenre()) &&
-//                                            albums[j].getArtist().getName().equalsIgnoreCase(albums[j + 1].getArtist().getName()) &&
-//                                                albums[j].getArtist().getBorn().compareTo(albums[j + 1].getArtist().getBorn()) > 0)) {
-//                    Album temp = albums[j];
-//                    albums[j] = albums[j + 1];
-//                    albums[j + 1] = temp;
-//                }
-//            }
-//        }
-//
-//        System.out.println("* Collection sorted by Genre/Artist *");
-//
-//        for(int i = 0; i < size; i++) {
-//            if (albums[i] != null) {
-//                System.out.println(albums[i]);
-//            }
-//        }
-//        System.out.println("* end of list *");
-//    }
-    //vivek gpt-
-//    public void printByGenre() {
-//        if (size == 0) {
-//            System.out.println("Collection is empty!");
-//            return;
-//        }
-//
-//        for (int i = 0; i < size - 1; i++) {
-//            for (int j = 0; j < size - i - 1; j++) {
-//                int genreComparison = albums[j].getGenre().compareTo(albums[j + 1].getGenre());
-//                int artistNameComparison = albums[j].getArtist().getName().compareToIgnoreCase(albums[j + 1].getArtist().getName());
-//
-//                // If genres are the same, compare artist names
-//                if (genreComparison == 0) {
-//                    // If artist names are the same, compare artist dates of birth
-//                    int artistDobComparison = albums[j].getArtist().getBorn().compareTo(albums[j + 1].getArtist().getBorn());
-//
-//                    if (artistNameComparison > 0 || (artistNameComparison == 0 && artistDobComparison > 0)) {
-//                        Album temp = albums[j];
-//                        albums[j] = albums[j + 1];
-//                        albums[j + 1] = temp;
-//                    }
-//                } else if (genreComparison > 0) {
-//                    Album temp = albums[j];
-//                    albums[j] = albums[j + 1];
-//                    albums[j + 1] = temp;
-//                }
-//            }
-//        }
-//
-//        System.out.println("* Collection sorted by Genre/Artist *");
-//
-//        for (int i = 0; i < size; i++) {
-//            if (albums[i] != null) {
-//                System.out.println(albums[i]);
-//            }
-//        }
-//        System.out.println("* end of list *");
-//    }
-    //ved gpt-
     public void printByGenre() {
         if (size == 0) {
             System.out.println("Collection is empty!");
             return;
         }
 
+        //Implement sorting algorithm here
+        //Sort by genre, then artist's names, and then artist's date of births
         for (int i = 0; i < size - 1; i++) {
             for (int j = 0; j < size - i - 1; j++) {
-                if (needsSwapByGenre(albums[j], albums[j + 1])) {
+                if (compareByGenreArtistDOB(albums[j], albums[j + 1]) == 1) {
+                    // Swap albums[j+1] and albums[j]
                     Album temp = albums[j];
                     albums[j] = albums[j + 1];
                     albums[j + 1] = temp;
@@ -282,68 +189,25 @@ public class Collection {
         }
 
         System.out.println("* Collection sorted by Genre/Artist ");
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             if (albums[i] != null) {
                 System.out.println(albums[i]);
             }
         }
         System.out.println(" end of list *");
-
     }
 
-    private boolean needsSwapByGenre(Album album1, Album album2) {
-        int genreComparison = album1.getGenre().compareTo(album2.getGenre());
-        if (genreComparison > 0) {
-            return true;
-        } else if (genreComparison < 0) {
-            return false;
-        }
-
-        int artistNameComparison = album1.getArtist().getName().compareToIgnoreCase(album2.getArtist().getName());
-        if (artistNameComparison > 0) {
-            return true;
-        } else if (artistNameComparison < 0) {
-            return false;
-        }
-
-        return album1.getArtist().getBorn().compareTo(album2.getArtist().getBorn()) > 0;
-    }
-
-    //more ved gpt-
-//    public void printByGenre() {
-//        if (size == 0) {
-//            System.out.println("Collection is empty!");
-//            return;
-//        }
-//
-//        for (int i = 0; i < size - 1; i++) {
-//            for (int j = 0; j < size - i - 1; j++) {
-//                if (shouldSwap(albums[j], albums[j + 1])) {
-//                    Album temp = albums[j];
-//                    albums[j] = albums[j + 1];
-//                    albums[j + 1] = temp;
-//                }
-//            }
-//        }
-//
-//        System.out.println("* Collection sorted by Genre/Artist ");
-//        for (int i = 0; i < size; i++) {
-//            if (albums[i] != null) {
-//                System.out.println(albums[i]);
-//            }
-//        }
-//        System.out.println(" end of list *");
-//    }
-
-    private boolean shouldSwap(Album a1, Album a2) {
+    private int compareByGenreArtistDOB(Album a1, Album a2) {
         int genreComparison = a1.getGenre().compareTo(a2.getGenre());
-        if (genreComparison > 0) return true;
-        if (genreComparison < 0) return false;
+        if (genreComparison == 1) return 1;
+        if (genreComparison == -1) return -1;
 
         int artistComparison = a1.getArtist().compareTo(a2.getArtist());
-        return artistComparison > 0;
-    }
+        if (artistComparison == 1) return 1;
+        if (artistComparison == -1) return -1;
 
+        return a1.getArtist().getBorn().compareTo(a2.getArtist().getBorn());
+    }
 
     /**
      * Displays all the albums in the collection sorted by average ratings, and then titles

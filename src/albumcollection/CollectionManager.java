@@ -1,11 +1,11 @@
 package albumcollection;
 
+import java.util.Scanner;
+
 /**
  * This is user interface class that processes the input and output of data
  * @author Ved Patel, Vivek Manthri
  */
-
-import java.util.Scanner;
 public class CollectionManager {
     public static final int CMD_NAME_INDEX = 0;
     public static final int TITLE_INDEX = 1;

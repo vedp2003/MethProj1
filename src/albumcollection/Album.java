@@ -118,17 +118,7 @@ public class Album {
      */
     @Override
     public boolean equals(Object obj) {
-        /*
-        if(this == obj){
-            return true;
-        }
-        if(obj == null || getClass() != obj.getClass()){
-            return false;
-        }
-        Album album = (Album) obj;
-        return title.equalsIgnoreCase(album.getTitle()) && artist.equals(album.getArtist());
 
-         */
         if (obj instanceof Album) {
             Album album = (Album) obj;
             return this.title.equalsIgnoreCase(album.getTitle()) && this.artist.equals(album.getArtist());
