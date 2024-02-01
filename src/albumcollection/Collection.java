@@ -150,11 +150,9 @@ public class Collection {
         System.out.println("* end of list *");
     }//sort by release date, then title
 
-    //gpt-
     private int compareAlbumsByDateAndTitle(Album album1, Album album2) {
         int dateComparison = album1.getReleased().compareTo(album2.getReleased());
         if (dateComparison == 0) {
-            // If release dates are the same, compare by title and then by artist's name
             int titleComparison = album1.getTitle().compareToIgnoreCase(album2.getTitle());
             if (titleComparison == 0) {
                 return album1.getArtist().getName().compareToIgnoreCase(album2.getArtist().getName());
@@ -179,15 +177,13 @@ public class Collection {
         //Implement sorting algorithm here
         //Sort by genre, then artist's names, and then artist's date of births
 
-        for (int i = 0; i < size; i++) {
-
-            System.out.println("G1: " + albums[i].getGenre());
-        }
-
         for (int i = 0; i < size - 1; i++) {
             for (int j = 0; j < size - i - 1; j++) {
 
-                if (compareByGenreArtistDOB(albums[j], albums[j + 1]) == 1) {
+                //if (compareByGenreArtistDOB(albums[j], albums[j + 1]) == 1) {
+                if ((albums[j].getGenre().toString().compareToIgnoreCase(albums[j + 1].getGenre().toString()) > 0)
+                    || ((albums[j].getGenre().toString().compareToIgnoreCase(albums[j + 1].getGenre().toString()) == 0 &&
+                        albums[j].getArtist().compareTo(albums[j + 1].getArtist()) == 1))) {
                     Album temp = albums[j];
                     albums[j] = albums[j + 1];
                     albums[j + 1] = temp;
