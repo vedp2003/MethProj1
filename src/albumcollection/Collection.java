@@ -156,23 +156,6 @@ public class Collection {
         System.out.println("* end of list *");
     }//sort by release date, then title
 
-    /*
-    private int compareAlbumsByDateAndTitle(Album album1, Album album2) {
-        int dateComparison = album1.getReleased().compareTo(album2.getReleased());
-        if (dateComparison == 0) {
-            int titleComparison = album1.getTitle().compareToIgnoreCase(album2.getTitle());
-            if (titleComparison == 0) {
-                return album1.getArtist().getName().compareToIgnoreCase(album2.getArtist().getName());
-            } else {
-                return titleComparison;
-            }
-        } else {
-            return dateComparison;
-        }
-    }
-
-     */
-
     /**
      * Displays all the albums in the collection sorted by genres, then artist's names, and then artist's date of births
      */

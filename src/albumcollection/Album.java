@@ -43,6 +43,7 @@ public class Album {
      * @return the title of the album
      */
     public String getTitle() {
+
         return title;
     }
 
@@ -51,6 +52,7 @@ public class Album {
      * @return the artist of the album
      */
     public Artist getArtist() {
+
         return artist;
     }
 
@@ -158,7 +160,6 @@ public class Album {
         else{
             result = ratingsString + "(average rating: " + String.format("%.2f", avgRatings()) + ")";
 
-            //ASKK - should we just format te avgRating with 2 decimals or do we need to round as well??
         }
         return "[" + title + "] Released " + released + " [" + artist.getName() + ":" +artist.getBorn() + "] [" + genre + "] Rating: " + result;
     }
