@@ -106,16 +106,6 @@ public class Collection {
      * @param rating the rating to assign
      */
     public void rate(Album album, int rating) {
-        /*
-        int albumIndex = NOT_FOUND;
-
-        for(int i = 0; i < size; i++){
-            if(albums[i].getTitle().equalsIgnoreCase(album.getTitle()) && albums[i].getArtist().equals(album.getArtist())){
-                albumIndex = i;
-            }
-        }
-
-         */
 
         int albumIndex = find(album);
         if(albumIndex != NOT_FOUND){
@@ -135,25 +125,11 @@ public class Collection {
      */
     public void printByDate() {
 
-        //Printbydate, genre, and rating dont sort it properly - WE NEED TO FIX THESE 3 methods, everything else works pretty sure
-
         if (size == 0) {
             System.out.println("Collection is empty!");
             return;
         }
-//        //ved-
-//        //ASK do we need efficient sorting method - this is like O(n^2)
-//        for (int i = 0; i < size - 1; i++) {
-//            for (int j = 0; j < size - i - 1; j++) {
-//                if (albums[j].getReleased().compareTo(albums[j + 1].getReleased()) > 0 ||
-//                        (albums[j].getReleased().equals(albums[j + 1].getReleased()) &&
-//                                albums[j].getTitle().compareToIgnoreCase(albums[j + 1].getTitle()) > 0)) {
-//                    Album temp = albums[j];
-//                    albums[j] = albums[j + 1];
-//                    albums[j + 1] = temp;
-//                }
-//            }
-//        }
+
         //gpt code
         for (int i = 0; i < size - 1; i++) {
             for (int j = 0; j < size - i - 1; j++) {
@@ -164,7 +140,6 @@ public class Collection {
                 }
             }
         }
-
 
         System.out.println("* Collection sorted by Released Date/Title *");
 
