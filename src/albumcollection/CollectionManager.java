@@ -132,7 +132,6 @@ public class CollectionManager {
         } else {
             System.out.println(title + newArtist + " is already in the collection.");
         }
-
     }
 
     /**
