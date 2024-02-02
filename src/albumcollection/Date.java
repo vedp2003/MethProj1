@@ -151,19 +151,24 @@ public class Date implements Comparable<Date> {
      */
     public static void main(String[] args) {
         Date dateCheck1 = new Date("15/21/2015");
-        System.out.println(dateCheck1.isValid());
-        Date dateCheck2 = new Date("1/32/1997");
-        System.out.println(dateCheck2.isValid());
-        Date dateCheck3 = new Date("6/31/2000");
-        System.out.println(dateCheck3.isValid());
-        Date dateCheck4 = new Date("2/29/2005");
-        System.out.println(dateCheck4.isValid());
-        Date dateCheck5 = new Date("2/30/2000");
-        System.out.println(dateCheck5.isValid());
-        Date dateCheck6 = new Date("1/27/2009");
-        System.out.println(dateCheck6.isValid());
-        Date dateCheck7 = new Date("2/29/2000");
-        System.out.println(dateCheck7.isValid());
+        System.out.println("Test Case 1 for whether " + dateCheck1 + " is valid : " + dateCheck1.isValid());
 
+        Date dateCheck2 = new Date("1/32/1997");
+        System.out.println("Test Case 2 for whether " + dateCheck2 + " is valid : " + dateCheck2.isValid());
+
+        Date dateCheck3 = new Date("6/31/2000");
+        System.out.println("Test Case 3 for whether " + dateCheck3 + " is valid : " + dateCheck3.isValid());
+
+        Date dateCheck4 = new Date("2/29/2005");
+        System.out.println("Test Case 4 for whether " + dateCheck4 + " is valid : " + dateCheck4.isValid());
+
+        Date dateCheck5 = new Date("2/30/2000");
+        System.out.println("Test Case 5 for whether " + dateCheck5 + " is valid : " + dateCheck5.isValid());
+
+        Date dateCheck6 = new Date("1/27/2009");
+        System.out.println("Test Case 6 for whether " + dateCheck6 + " is valid : " + dateCheck6.isValid());
+
+        Date dateCheck7 = new Date("2/29/2000");
+        System.out.println("Test Case 7 for whether " + dateCheck7 + " is valid : " + dateCheck7.isValid());
     }
 }
