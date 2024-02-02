@@ -83,12 +83,33 @@ public class Artist implements Comparable<Artist> {
 
     /**
      * Testbed main() for Date class. Tests the compareTo() method
-     * @param args the command line arguments containing dates to be tested
+     * Two test cases return -1, two test cases return 1, and one test case returns 0
+     * @param args the command line arguments
      */
     public static void main(String[] args) {
 
         //Artist class – design test cases for testing the compareTo() method; two test cases return -1, two test cases
         //return 1, and one test case returns 0
+
+        Artist artistCheck1 = new Artist("Abraham Lincoln", new Date("11/12/2004")); //name comes before John even when Date is same as the next artist
+        Artist artistCheck2 = new Artist("John Wang", new Date("11/12/2004"));
+        System.out.println("Case 1: " + artistCheck1.compareTo(artistCheck2));
+
+        Artist artistCheck3 = new Artist("Mark Sandberg", new Date("1/26/1990")); //name is same but this date comes before the next artist
+        Artist artistCheck4 = new Artist("Mark Sandberg", new Date("8/11/2016"));
+        System.out.println("Case 2: " + artistCheck3.compareTo(artistCheck4));
+
+        Artist artistCheck5 = new Artist("Vivek Manthri", new Date("7/4/1990")); //name comes after Ved even though when Date comes before the next artist
+        Artist artistCheck6 = new Artist("Ved Patel", new Date("10/15/2003"));
+        System.out.println("Case 3: " + artistCheck5.compareTo(artistCheck6));
+
+        Artist artistCheck7 = new Artist("Zuck Riggy", new Date("12/15/1998")); //name is same but date comes after the next artist
+        Artist artistCheck8 = new Artist("Zuck Riggy", new Date("12/4/1998"));
+        System.out.println("Case 4: " + artistCheck7.compareTo(artistCheck8));
+
+        Artist artistCheck9 = new Artist("Bob Builder", new Date("6/6/2000")); //name and date as same
+        Artist artistCheck10 = new Artist("Bob Builder", new Date("6/6/2000"));
+        System.out.println("Case 5: " + artistCheck9.compareTo(artistCheck10));
 
     }
 }

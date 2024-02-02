@@ -146,14 +146,24 @@ public class Date implements Comparable<Date> {
 
     /**
      * Testbed main() for Date class. Tests the isValid() method
-     * @param args the command line arguments containing dates to be tested
+     * Tests five invalid and two valid test cases
+     * @param args the command line arguments
      */
     public static void main(String[] args) {
+        Date dateCheck1 = new Date("15/21/2015");
+        System.out.println(dateCheck1.isValid());
+        Date dateCheck2 = new Date("1/32/1997");
+        System.out.println(dateCheck2.isValid());
+        Date dateCheck3 = new Date("6/31/2000");
+        System.out.println(dateCheck3.isValid());
+        Date dateCheck4 = new Date("2/29/2005");
+        System.out.println(dateCheck4.isValid());
+        Date dateCheck5 = new Date("2/30/2000");
+        System.out.println(dateCheck5.isValid());
+        Date dateCheck6 = new Date("1/27/2009");
+        System.out.println(dateCheck6.isValid());
+        Date dateCheck7 = new Date("2/29/2000");
+        System.out.println(dateCheck7.isValid());
 
-        //FINISH the isValid test cases - not done yet
-        //Date class – design five invalid and two valid test cases for testing the isValid() method
-        String s = args[0];
-        Date date = new Date(s);
-        System.out.println(date.isValid());
     }
 }
