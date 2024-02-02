@@ -37,25 +37,11 @@ public class Artist implements Comparable<Artist> {
     /**
      * Compare two Artist objects based on the name of the artist first, then date of birth
      * @param o the artist object to be compared
-     * @return a negative one, zero, or a positive one depending on if this artist is less than, equal to, or greater than the specified artist
+     * @return a negative one, zero, or a positive one depending on if this artist is
+     * less than, equal to, or greater than the specified artist
      */
     @Override
     public int compareTo(Artist o) {
-
-        /*
-        int nameComparison = this.name.compareToIgnoreCase(o.name);
-        if(nameComparison != 0) {
-            return nameComparison;
-        }
-        return this.born.compareTo(o.born);
-
-         */
-
-
-
-        //DO THESE -1, 1, 0 need to be made into constants to avoid magic numbers??
-
-
         int nameComparison = this.name.compareToIgnoreCase(o.name);
         if (nameComparison > 0) {
             return 1;
@@ -65,10 +51,10 @@ public class Artist implements Comparable<Artist> {
         }
         else {
             int dateComparison = this.born.compareTo(o.born);
-            if (dateComparison > 0) {
+            if (dateComparison == 0) {
                 return 1;
             }
-            else if (dateComparison < 0) {
+            else if (dateComparison == -1) {
                 return -1;
             }
             else {

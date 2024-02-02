@@ -117,108 +117,93 @@ public class Collection {
 
     }
 
+
     /**
      * Displays all the albums in the collection sorted by release dates, and then titles
+     * Uses insertion sort logic to order the albums
      */
     public void printByDate() {
         if (size == 0) {
             System.out.println("Collection is empty!");
             return;
         }
-
-        for (int i = 0; i < size - 1; i++) {
-            for (int j = 0; j < size - i - 1; j++) {
-                if ((albums[j].getReleased().compareTo(albums[j + 1].getReleased()) > 0)
-                        || (albums[j].getReleased().compareTo(albums[j + 1].getReleased()) == 0
-                            && albums[j].getTitle().compareToIgnoreCase(albums[j + 1].getTitle()) > 0)
-                                || (albums[j].getReleased().compareTo(albums[j + 1].getReleased()) == 0
-                                    && albums[j].getTitle().compareToIgnoreCase(albums[j + 1].getTitle()) == 0
-                                        && albums[j].getArtist().getName().compareToIgnoreCase(albums[j + 1].getArtist().getName()) > 0)) {
-
-                    Album temp = albums[j];
-                    albums[j] = albums[j + 1];
-                    albums[j + 1] = temp;
-                }
+        for (int i = 1; i < size; i++) {
+            Album key = albums[i];
+            int j = i - 1;
+            while (j >= 0 && (
+                    (albums[j].getReleased().compareTo(key.getReleased()) == 1)
+                            || (albums[j].getReleased().compareTo(key.getReleased()) == 0
+                            && albums[j].getTitle().compareToIgnoreCase(key.getTitle()) > 0)
+                            || (albums[j].getReleased().compareTo(key.getReleased()) == 0
+                            && albums[j].getTitle().compareToIgnoreCase(key.getTitle()) == 0
+                            && albums[j].getArtist().getName().compareToIgnoreCase(key.getArtist().getName()) > 0)
+            )) {
+                albums[j + 1] = albums[j];
+                j = j - 1;
             }
+            albums[j + 1] = key;
         }
+        printAlbums("Released Date/Title");
+    }
 
-        System.out.println("* Collection sorted by Released Date/Title *");
-
-        for (int i = 0; i < size; i++) {
-            if (albums[i] != null) {
-                System.out.println(albums[i]);
-            }
-        }
-        System.out.println("* end of list *");
-    }//sort by release date, then title
 
     /**
      * Displays all the albums in the collection sorted by genres, then artist's names, and then artist's date of births
+     * Uses insertion sort logic to order the albums
      */
     public void printByGenre() {
-
         if (size == 0) {
             System.out.println("Collection is empty!");
             return;
         }
-
-        //Implement sorting algorithm here
-        //Sort by genre, then artist's names, and then artist's date of births
-
-        for (int i = 0; i < size - 1; i++) {
-            for (int j = 0; j < size - i - 1; j++) {
-                if ((albums[j].getGenre().toString().compareToIgnoreCase(albums[j + 1].getGenre().toString()) > 0)
-                    || ((albums[j].getGenre().toString().compareToIgnoreCase(albums[j + 1].getGenre().toString()) == 0 &&
-                        albums[j].getArtist().compareTo(albums[j + 1].getArtist()) == 1))) {
-                    Album temp = albums[j];
-                    albums[j] = albums[j + 1];
-                    albums[j + 1] = temp;
-                }
+        for (int i = 1; i < size; i++) {
+            Album key = albums[i];
+            int j = i - 1;
+            while (j >= 0 && (
+                    (albums[j].getGenre().toString().compareToIgnoreCase(key.getGenre().toString()) > 0)
+                            || ((albums[j].getGenre().toString().compareToIgnoreCase(key.getGenre().toString()) == 0)
+                            && albums[j].getArtist().compareTo(key.getArtist()) == 1)
+            )) {
+                albums[j + 1] = albums[j];
+                j = j - 1;
             }
+            albums[j + 1] = key;
         }
-
-        System.out.println("* Collection sorted by Genre/Artist ");
-        for (int i = 0; i < size; i++) {
-            if (albums[i] != null) {
-                System.out.println(albums[i]);
-            }
-        }
-        System.out.println(" end of list *");
-    }
-
-    private int compareByGenreArtistDOB(Album a1, Album a2) {
-        int genreComparison = a1.getGenre().toString().compareTo(a2.getGenre().toString());
-
-        if (genreComparison > 0) return 1;
-        if (genreComparison < 0) return -1;
-
-        return a1.getArtist().compareTo(a2.getArtist());
+        printAlbums("Genre/Artist");
     }
 
     /**
      * Displays all the albums in the collection sorted by average ratings, and then titles
+     * Uses insertion sort logic to order the albums
      */
     public void printByRating() {
         if (size == 0) {
             System.out.println("Collection is empty!");
             return;
         }
-
-        for (int i = 0; i < size - 1; i++) {
-            for (int j = 0; j < size - i - 1; j++) {
-                if (albums[j].avgRatings() < albums[j + 1].avgRatings() ||
-                        (albums[j].avgRatings() == albums[j + 1].avgRatings() &&
-                            albums[j].getTitle().compareToIgnoreCase(albums[j + 1].getTitle()) > 0)) {
-                    Album temp = albums[j];
-                    albums[j] = albums[j + 1];
-                    albums[j + 1] = temp;
-                }
+        for (int i = 1; i < size; i++) {
+            Album key = albums[i];
+            int j = i - 1;
+            while (j >= 0 && (
+                    albums[j].avgRatings() < key.avgRatings()
+                            || (albums[j].avgRatings() == key.avgRatings()
+                            && albums[j].getTitle().compareToIgnoreCase(key.getTitle()) > 0)
+            )) {
+                albums[j + 1] = albums[j];
+                j = j - 1;
             }
+            albums[j + 1] = key;
         }
+        printAlbums("Rating/Title");
+    }
 
-        System.out.println("* Collection sorted by Rating/Title *");
-
-        for(int i = 0; i < size; i++) {
+    /**
+     * Helper method to print the albums after sorting
+     * @param sortedBy the string representing the criteria used for sorting the albums
+     */
+    private void printAlbums(String sortedBy) {
+        System.out.println("* Collection sorted by " + sortedBy + " *");
+        for (int i = 0; i < size; i++) {
             if (albums[i] != null) {
                 System.out.println(albums[i]);
             }

@@ -11,30 +11,26 @@ public class Date implements Comparable<Date> {
     public static final int QUADRENNIAL = 4;
     public static final int CENTENNIAL = 100;
     public static final int QUATERCENTENNIAL = 400;
+    public static final int NUMBER_MONTHS = 12;
+    public static final int BIG_MONTH_DAYS = 31;
+    public static final int SMALL_MONTH_DAYS = 30;
+    public static final int LEAP_FEB_DAYS = 29;
+    public static final int REG_FEB_DAYS = 28;
+
+    public static final int FEB = 2;
     public static final int APR = 4;
     public static final int JUN = 6;
     public static final int SEP = 9;
     public static final int NOV = 11;
-    public static final int FEB = 2;
-    public static final int LONGMONTH = 31;
-    public static final int SHORTMONTH = 30;
-    public static final int LEAPFEB = 29;
-    public static final int REGFEB = 28;
-    public static final int MONTHS = 12;
 
     private int year;
     private int month;
     private int day;
 
-    //ASK ABOUT order of these, do public static final come before private ints
-
-
     /**
      * Default constructor/no-argument constructor
      */
     public Date() {
-
-        //ASK IF WE EVEN NEED THIS default constructor
         this.year = 0;
         this.month = 0;
         this.day = 0;
@@ -52,24 +48,12 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     * Checks if the given year is a leap year (has 29 days in February)
-     * @param yr the year to check
+     * Helper method that checks if the given year is a leap year
+     * @param year the year to check
      * @return true if the given year is a leap year; false otherwise
      */
-    public boolean isLeap(int yr){
-
-        //SHOULD THIS method be private boolean since its a helper method??
-
-        /*
-        if(yr % QUADRENNIAL != 0) return false;
-        if(yr % CENTENNIAL != 0) return true;
-        else {
-            if(yr % QUATERCENTENNIAL == 0) return true;
-        }
-        return false;
-         */
-
-        return (yr % QUADRENNIAL == 0 && (yr % CENTENNIAL != 0 || yr % QUATERCENTENNIAL == 0));
+    private boolean isLeap(int year){
+        return (year % QUADRENNIAL == 0 && (year % CENTENNIAL != 0 || year % QUATERCENTENNIAL == 0));
     }
 
     /**
@@ -77,21 +61,21 @@ public class Date implements Comparable<Date> {
      * @return true if the date is valid; false otherwise
      */
     public boolean isValid() {
-
-        //ALSO ask if isValid should include isTodayOrFutureDate and isBefore1900 inside it
-        // (such as when we have to test isValid in the testbed main()
-
-        if(this.month < 1 || this.month > MONTHS) return false;
-        if(this.day < 1 || this.day > LONGMONTH) return false;
-        if(this.year < 0) return false;
-        if(this.month == APR || this.month == JUN
-                || this.month == SEP || this.month == NOV){
-            if(this.day > SHORTMONTH) return false;
-        } else if(this.month == FEB){
-            if (isLeap(this.year)) {
-                if(this.day > LEAPFEB) return false;
-            } else {
-                if(this.day > REGFEB) return false;
+        if(this.year < 0 || this.month > NUMBER_MONTHS || this.month < 1 ||
+                this.day > BIG_MONTH_DAYS || this.day < 1) {
+            return false;
+        }
+        if (this.month == APR || this.month == JUN || this.month == SEP || this.month == NOV) {
+            if (this.day > SMALL_MONTH_DAYS) {
+                return false;
+            }
+        }
+        else if (this.month == FEB) {
+            if (!isLeap(this.year) && this.day > REG_FEB_DAYS) {
+                return false;
+            }
+            if (isLeap(this.year) && this.day > LEAP_FEB_DAYS) {
+                return false;
             }
         }
         return true;
@@ -102,14 +86,14 @@ public class Date implements Comparable<Date> {
      * @return true if the date is today or in the future; false otherwise
      */
     public boolean isTodayOrFutureDate() {
-        Calendar cal = Calendar.getInstance();
-        int currentYear = cal.get(Calendar.YEAR);
-        int currentMonth = cal.get(Calendar.MONTH) + 1;
-        int currentDay = cal.get(Calendar.DAY_OF_MONTH);
+        Calendar calendarInstance = Calendar.getInstance();
+        int currentYear = calendarInstance.get(Calendar.YEAR);
+        int currentMonth = calendarInstance.get(Calendar.MONTH) + 1; //since Calendar numbers months from 0 to 11
+        int currentDay = calendarInstance.get(Calendar.DAY_OF_MONTH);
 
-        return (year > currentYear) || (year == currentYear && month > currentMonth) ||
-                (year == currentYear && month == currentMonth && day > currentDay) ||
-                    ((year == currentYear && month == currentMonth && day == currentDay));
+        return (this.year > currentYear) || (this.year == currentYear && this.month > currentMonth) ||
+                (this.year == currentYear && this.month == currentMonth && this.day > currentDay) ||
+                    ((this.year == currentYear && this.month == currentMonth && this.day == currentDay));
 
     }
 
@@ -118,25 +102,36 @@ public class Date implements Comparable<Date> {
      * @return true if the date is before 1900; false otherwise
      */
     public boolean isBefore1900() {
-        return year < 1900;
+        return this.year < 1900;
     }
 
     /**
-     * Compare two Artist objects based on the nam
+     * Compare two Date objects based on year, month, and day
      * @param o the date object to be compared
-     * @return a negative integer, zero, or a positive integer depending on if this date is less than, equal to, or greater than the specified date
+     * @return a negative one, zero, or a positive one depending on if this date is
+     * less than, equal to, or greater than the specified date
      */
     @Override
     public int compareTo(Date o) {
-        if (this.year != o.year)
-            return this.year - o.year;
-        else {
-            if (this.month != o.month)
-                return this.month - o.month;
-            else {
-                if(this.day != o.day)
-                    return this.day - o.day;
-            }
+        if(this.year != o.year && this.year - o.year > 0) {
+            return 1;
+        }
+        else if (this.year != o.year && this.year - o.year < 0) {
+            return -1;
+        }
+
+        if(this.month != o.month && this.month - o.month > 0) {
+            return 1;
+        }
+        else if (this.month != o.month && this.month - o.month < 0) {
+            return -1;
+        }
+
+        if(this.day != o.day && this.day - o.day > 0) {
+            return 1;
+        }
+        else if (this.day != o.day && this.day - o.day < 0) {
+            return -1;
         }
         return 0;
     }

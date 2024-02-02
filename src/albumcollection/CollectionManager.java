@@ -28,8 +28,6 @@ public class CollectionManager {
      * Default constructor/no-argument constructor
      */
     public CollectionManager(){
-
-        //ASKK - can we inialize this here & can we have Collection /Scanner private
         collection = new Collection();
         scanner = new Scanner(System.in);
     }
