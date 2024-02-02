@@ -51,7 +51,7 @@ public class Artist implements Comparable<Artist> {
         }
         else {
             int dateComparison = this.born.compareTo(o.born);
-            if (dateComparison == 0) {
+            if (dateComparison == 1) {
                 return 1;
             }
             else if (dateComparison == -1) {
