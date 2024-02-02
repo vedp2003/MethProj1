@@ -20,7 +20,6 @@ public class CollectionManager {
     public static final int REMOVE_INPUT_MAX = 4;
     public static final int RATE_INPUT_MAX = 5;
 
-
     private Collection collection;
     private Scanner scanner;
 
@@ -40,11 +39,9 @@ public class CollectionManager {
         String inputStr;
         while (true) {
             inputStr = scanner.nextLine().trim();
-
             while (inputStr.isEmpty()) {
                 inputStr = scanner.nextLine();
             }
-
             if ("Q".equals(inputStr)) {
                 System.out.println("Collection Manager terminated.");
                 break;
@@ -59,10 +56,7 @@ public class CollectionManager {
      */
     private void processInputs(String input){
         String[] strSplit = input.split(",");
-        if (strSplit.length == 0) {
-            return;
-        }
-        String commandName = strSplit[CMD_NAME_INDEX].trim();
+        String commandName = strSplit[CMD_NAME_INDEX];
         switch (commandName) {
             case "A":
                 addAlbum(strSplit);
@@ -99,23 +93,23 @@ public class CollectionManager {
             System.out.println("Invalid command!");
             return;
         }
-        String title = parts[TITLE_INDEX].trim();
-        String artistName = parts[ARTIST_NAME_INDEX].trim();
-        Date artistDob = new Date(parts[ARTIST_DOB_INDEX].trim());
+        String title = parts[TITLE_INDEX];
+        String artistName = parts[ARTIST_NAME_INDEX];
+        Date artistDob = new Date(parts[ARTIST_DOB_INDEX]);
         if (!artistDob.isValid() || artistDob.isTodayOrFutureDate() || artistDob.isBefore1900()) {
             System.out.println("Artist DOB: " + artistDob + " is invalid.");
             return;
         }
-        Genre genre;
-        try {
-            genre = Genre.valueOf(parts[GENRE_INDEX].trim().toUpperCase());
-        } catch (IllegalArgumentException e) {
-            genre = Genre.UNKNOWN;
-        }
-        Date releaseDate = new Date(parts[RELEASE_DATE_INDEX].trim());
+        Date releaseDate = new Date(parts[RELEASE_DATE_INDEX]);
         if (!releaseDate.isValid() || releaseDate.isTodayOrFutureDate() || releaseDate.isBefore1900()) {
             System.out.println("Date Released: " + releaseDate + " is invalid.");
             return;
+        }
+        Genre genre;
+        try {
+            genre = Genre.valueOf(parts[GENRE_INDEX].toUpperCase());
+        } catch (IllegalArgumentException e) {
+            genre = Genre.UNKNOWN;
         }
         Artist newArtist = new Artist(artistName, artistDob);
         Album newAlbum = new Album(title, newArtist, genre, releaseDate);
@@ -138,12 +132,12 @@ public class CollectionManager {
             System.out.println("Invalid command!");
             return;
         }
-        String title = parts[TITLE_INDEX].trim();
-        String artistName = parts[ARTIST_NAME_INDEX].trim();
-        Date artistDob = new Date(parts[ARTIST_DOB_INDEX].trim());
-
+        String title = parts[TITLE_INDEX];
+        String artistName = parts[ARTIST_NAME_INDEX];
+        Date artistDob = new Date(parts[ARTIST_DOB_INDEX]);
         Artist artistToRemove = new Artist(artistName, artistDob);
         Album albumToRemove = new Album(title, artistToRemove);
+
         if (collection.remove(albumToRemove)) {
             System.out.println(title + artistToRemove + " removed from the collection.");
         } else {
@@ -163,17 +157,11 @@ public class CollectionManager {
             System.out.println("Invalid command!");
             return;
         }
-        String title = parts[TITLE_INDEX].trim();
-        String artistName = parts[ARTIST_NAME_INDEX].trim();
-        Date artistDob = new Date(parts[ARTIST_DOB_INDEX].trim());
-        int rating;
-        try {
-            rating = Integer.parseInt(parts[RATING_INDEX].trim());
-        }
-        catch (NumberFormatException e) {
-            System.out.println("Invalid rating, rating scale is 1 to 5.");
-            return;
-        }
+        String title = parts[TITLE_INDEX];
+        String artistName = parts[ARTIST_NAME_INDEX];
+        Date artistDob = new Date(parts[ARTIST_DOB_INDEX]);
+        int rating = Integer.parseInt(parts[RATING_INDEX]);
+
         if (rating < RATING_MIN || rating > RATING_MAX) {
             System.out.println("Invalid rating, rating scale is 1 to 5.");
             return;

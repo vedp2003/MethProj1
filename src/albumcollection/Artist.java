@@ -42,26 +42,20 @@ public class Artist implements Comparable<Artist> {
      */
     @Override
     public int compareTo(Artist o) {
-        int nameComparison = this.name.compareToIgnoreCase(o.name);
-        if (nameComparison > 0) {
+        if (this.name.compareToIgnoreCase(o.name) > 0) {
             return 1;
         }
-        else if (nameComparison < 0) {
+        else if (this.name.compareToIgnoreCase(o.name) < 0) {
             return -1;
         }
-        else {
-            int dateComparison = this.born.compareTo(o.born);
-            if (dateComparison == 1) {
-                return 1;
-            }
-            else if (dateComparison == -1) {
-                return -1;
-            }
-            else {
-                return 0;
-            }
-        }
 
+        if (this.born.compareTo(o.born) == 1) {
+            return 1;
+        }
+        else if (this.born.compareTo(o.born) == -1) {
+            return -1;
+        }
+        return 0;
     }
 
     /**

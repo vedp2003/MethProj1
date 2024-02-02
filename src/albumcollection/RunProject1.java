@@ -1,7 +1,7 @@
 package albumcollection;
 
 /**
- * A driver class to run ColectionManager for Project1
+ * A driver class to run CollectionManager for Project1
  * @author Ved Patel, Vivek Manthri
  */
 public class RunProject1 {

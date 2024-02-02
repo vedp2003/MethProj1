@@ -103,9 +103,6 @@ public class Album {
             counter++;
             current = current.getNext();
         }
-        if (counter == 0) {
-            return 0.00;
-        }
         return (double) total / counter;
     }
 

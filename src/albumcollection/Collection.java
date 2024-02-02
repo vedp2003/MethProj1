@@ -6,7 +6,6 @@ package albumcollection;
  * @author Ved Patel, Vivek Manthri
  */
 public class Collection {
-
     private static final int INITIAL_CAPACITY = 4;
     private static final int GROW_CAPACITY = 4;
     private static final int NOT_FOUND = -1;
@@ -54,12 +53,7 @@ public class Collection {
      * @return true if album is in the list; false otherwise
      */
     public boolean contains(Album album) {
-        if (find(album) != NOT_FOUND) {
-            return true;
-        }
-        else{
-            return false;
-        }
+        return find(album) != NOT_FOUND;
     }
 
     /**
@@ -103,7 +97,6 @@ public class Collection {
      * @param rating the rating to assign
      */
     public void rate(Album album, int rating) {
-
         int albumIndex = find(album);
         if (albumIndex != NOT_FOUND) {
             albums[albumIndex].rate(rating);
@@ -112,11 +105,8 @@ public class Collection {
         }
         else {
             System.out.println(album.getTitle() + album.getArtist() + " is not in the collection");
-
         }
-
     }
-
 
     /**
      * Displays all the albums in the collection sorted by release dates, and then titles
@@ -139,7 +129,7 @@ public class Collection {
                             && albums[j].getArtist().getName().compareToIgnoreCase(key.getArtist().getName()) > 0)
             )) {
                 albums[j + 1] = albums[j];
-                j = j - 1;
+                j -= 1;
             }
             albums[j + 1] = key;
         }
@@ -165,7 +155,7 @@ public class Collection {
                             && albums[j].getArtist().compareTo(key.getArtist()) == 1)
             )) {
                 albums[j + 1] = albums[j];
-                j = j - 1;
+                j -= 1;
             }
             albums[j + 1] = key;
         }
@@ -190,7 +180,7 @@ public class Collection {
                             && albums[j].getTitle().compareToIgnoreCase(key.getTitle()) > 0)
             )) {
                 albums[j + 1] = albums[j];
-                j = j - 1;
+                j -= 1;
             }
             albums[j + 1] = key;
         }

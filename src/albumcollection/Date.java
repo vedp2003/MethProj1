@@ -16,7 +16,6 @@ public class Date implements Comparable<Date> {
     public static final int SMALL_MONTH_DAYS = 30;
     public static final int LEAP_FEB_DAYS = 29;
     public static final int REG_FEB_DAYS = 28;
-
     public static final int FEB = 2;
     public static final int APR = 4;
     public static final int JUN = 6;
