@@ -71,6 +71,7 @@ public class CollectionManager {
             }
             System.out.println("* Collection sorted by Released Date/Title *");
             collection.printByDate();
+            printAlbums();
             System.out.println("* end of list *");
         } else if ("PG".equals(commandName)) {
             if (checkEmptyCollection()) {
@@ -78,6 +79,7 @@ public class CollectionManager {
             }
             System.out.println("* Collection sorted by Genre/Artist *");
             collection.printByGenre();
+            printAlbums();
             System.out.println("* end of list *");
         } else if ("PR".equals(commandName)) {
             if (checkEmptyCollection()) {
@@ -85,9 +87,22 @@ public class CollectionManager {
             }
             System.out.println("* Collection sorted by Rating/Title *");
             collection.printByRating();
+            printAlbums();
             System.out.println("* end of list *");
         } else {
             System.out.println("Invalid command!");
+        }
+    }
+
+    /**
+     * Helper method to print the albums after sorting
+     */
+    private void printAlbums() {
+        Album[] albumToPrint = collection.getAlbums();
+        for (int i = 0; i < collection.getSize(); i++) {
+            if (albumToPrint[i] != null) {
+                System.out.println(albumToPrint[i]);
+            }
         }
     }
 

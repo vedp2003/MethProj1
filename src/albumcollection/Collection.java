@@ -31,6 +31,10 @@ public class Collection {
         return size;
     }
 
+    public Album[] getAlbums() {
+        return albums;
+    }
+
     /**
      * Helper method to find the index of a given album in the list of albums
      *
@@ -150,7 +154,6 @@ public class Collection {
             }
             albums[j + 1] = key;
         }
-        printAlbums();
     }
 
 
@@ -172,7 +175,6 @@ public class Collection {
             }
             albums[j + 1] = key;
         }
-        printAlbums();
     }
 
     /**
@@ -191,18 +193,6 @@ public class Collection {
                 j -= 1;
             }
             albums[j + 1] = key;
-        }
-        printAlbums();
-    }
-
-    /**
-     * Helper method to print the albums after sorting
-     */
-    private void printAlbums() {
-        for (int i = 0; i < size; i++) {
-            if (albums[i] != null) {
-                System.out.println(albums[i]);
-            }
         }
     }
 }
