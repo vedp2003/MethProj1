@@ -3,7 +3,8 @@ package albumcollection;
 import java.util.Scanner;
 
 /**
- * This is user interface class that processes the input and output of data
+ * This is the user interface class that processes the input and output of data
+ *
  * @author Ved Patel, Vivek Manthri
  */
 public class CollectionManager {
@@ -26,7 +27,7 @@ public class CollectionManager {
     /**
      * Default constructor/no-argument constructor
      */
-    public CollectionManager(){
+    public CollectionManager() {
         collection = new Collection();
         scanner = new Scanner(System.in);
     }
@@ -34,7 +35,7 @@ public class CollectionManager {
     /**
      * Runs the Collection Manager, takes in input commands, and calls the appropriate processing method
      */
-    public void run(){
+    public void run() {
         System.out.println("Collection Manager is up running.");
         String inputStr;
         while (true) {
@@ -52,39 +53,61 @@ public class CollectionManager {
 
     /**
      * Helper method to process the input command and delegate to the respective methods
+     *
      * @param input the string representing the command terminal input
      */
-    private void processInputs(String input){
+    private void processInputs(String input) {
         String[] strSplit = input.split(",");
         String commandName = strSplit[CMD_NAME_INDEX];
-        switch (commandName) {
-            case "A":
-                addAlbum(strSplit);
-                break;
-            case "D":
-                removeAlbum(strSplit);
-                break;
-            case "R":
-                rateAlbum(strSplit);
-                break;
-            case "PD":
-                collection.printByDate();
-                break;
-            case "PG":
-                collection.printByGenre();
-                break;
-            case "PR":
-                collection.printByRating();
-                break;
-            default:
-                System.out.println("Invalid command!");
-                break;
+        if ("A".equals(commandName)) {
+            addAlbum(strSplit);
+        } else if ("D".equals(commandName)) {
+            removeAlbum(strSplit);
+        } else if ("R".equals(commandName)) {
+            rateAlbum(strSplit);
+        } else if ("PD".equals(commandName)) {
+            if (checkEmptyCollection()) {
+                return;
+            }
+            System.out.println("* Collection sorted by Released Date/Title *");
+            collection.printByDate();
+            System.out.println("* end of list *");
+        } else if ("PG".equals(commandName)) {
+            if (checkEmptyCollection()) {
+                return;
+            }
+            System.out.println("* Collection sorted by Genre/Artist *");
+            collection.printByGenre();
+            System.out.println("* end of list *");
+        } else if ("PR".equals(commandName)) {
+            if (checkEmptyCollection()) {
+                return;
+            }
+            System.out.println("* Collection sorted by Rating/Title *");
+            collection.printByRating();
+            System.out.println("* end of list *");
+        } else {
+            System.out.println("Invalid command!");
         }
+    }
+
+    /**
+     * Helper method to check whether the collection of albums is empty or not
+     *
+     * @return true if the collection of albums is empty; false if not empty
+     */
+    private boolean checkEmptyCollection() {
+        if (collection.getSize() == 0) {
+            System.out.println("Collection is empty!");
+            return true;
+        }
+        return false;
     }
 
     /**
      * Adds an album to the collection and prints out corresponding message.
      * Verifies whether the album Dates are valid and the album exists
+     *
      * @param parts an array of strings, where each element represents a specific piece of information
      *              from the command line argument
      */
@@ -115,8 +138,7 @@ public class CollectionManager {
         Album newAlbum = new Album(title, newArtist, genre, releaseDate);
         if (collection.add(newAlbum)) {
             System.out.println(title + newArtist + " added to the collection.");
-        }
-        else {
+        } else {
             System.out.println(title + newArtist + " is already in the collection.");
         }
     }
@@ -124,6 +146,7 @@ public class CollectionManager {
     /**
      * Removes an album from the collection and prints out corresponding message.
      * Verifies whether the album actually exists
+     *
      * @param parts an array of strings, where each element represents a specific piece of information
      *              from the command line argument
      */
@@ -143,12 +166,12 @@ public class CollectionManager {
         } else {
             System.out.println(title + artistToRemove + " is not in the collection");
         }
-
     }
 
     /**
      * Rates an album in the collection and prints out corresponding message.
      * Verifies whether the album ratings are within the 1-5 range
+     *
      * @param parts an array of strings, where each element represents a specific piece of information
      *              from the command line argument
      */
@@ -166,6 +189,15 @@ public class CollectionManager {
             System.out.println("Invalid rating, rating scale is 1 to 5.");
             return;
         }
-        collection.rate(new Album(title, new Artist(artistName, artistDob)), rating);
+        Artist rateArtist = new Artist(artistName, artistDob);
+        Album rateAlbum = new Album(title, rateArtist);
+
+        if (collection.contains(rateAlbum)) {
+            collection.rate(rateAlbum, rating);
+            System.out.println("You rate " + rating + " for " + rateAlbum.getTitle() + ":" +
+                    collection.getReleasedForRating(rateAlbum) + "(" + rateAlbum.getArtist().getName() + ")");
+        } else {
+            System.out.println(title + rateArtist + " is not in the collection");
+        }
     }
 }

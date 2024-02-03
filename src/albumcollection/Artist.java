@@ -2,6 +2,7 @@ package albumcollection;
 
 /**
  * This class creates and defines the properties of an Artist object
+ *
  * @author Ved Patel, Vivek Manthri
  */
 public class Artist implements Comparable<Artist> {
@@ -10,6 +11,7 @@ public class Artist implements Comparable<Artist> {
 
     /**
      * Parameterized constructor requires 2 parameters to create an artist object
+     *
      * @param name the name of the artist
      * @param born the date of birth of the artist
      */
@@ -20,6 +22,7 @@ public class Artist implements Comparable<Artist> {
 
     /**
      * A getter method returns the name of the artist
+     *
      * @return the name of the artist
      */
     public String getName() {
@@ -28,6 +31,7 @@ public class Artist implements Comparable<Artist> {
 
     /**
      * A getter method returns the date of birth of the artist
+     *
      * @return the date of birth of the artist in mm/dd/yyyy format
      */
     public Date getBorn() {
@@ -36,6 +40,7 @@ public class Artist implements Comparable<Artist> {
 
     /**
      * Compare two Artist objects based on the name of the artist first, then date of birth
+     *
      * @param o the artist object to be compared
      * @return a negative one, zero, or a positive one depending on if this artist is
      * less than, equal to, or greater than the specified artist
@@ -44,15 +49,13 @@ public class Artist implements Comparable<Artist> {
     public int compareTo(Artist o) {
         if (this.name.compareToIgnoreCase(o.name) > 0) {
             return 1;
-        }
-        else if (this.name.compareToIgnoreCase(o.name) < 0) {
+        } else if (this.name.compareToIgnoreCase(o.name) < 0) {
             return -1;
         }
 
         if (this.born.compareTo(o.born) == 1) {
             return 1;
-        }
-        else if (this.born.compareTo(o.born) == -1) {
+        } else if (this.born.compareTo(o.born) == -1) {
             return -1;
         }
         return 0;
@@ -60,6 +63,7 @@ public class Artist implements Comparable<Artist> {
 
     /**
      * Determines if two Artist objects are equal based on name and date of birth
+     *
      * @param obj the artist object to be compared
      * @return true if the names and date of births of the albums are the same; false otherwise
      */
@@ -74,6 +78,7 @@ public class Artist implements Comparable<Artist> {
 
     /**
      * Return a textual representation of an Artist object
+     *
      * @return a string of the format (Name:DateOfBirth)
      */
     @Override
@@ -84,6 +89,7 @@ public class Artist implements Comparable<Artist> {
     /**
      * Testbed main() for Artist class, which tests the compareTo() method.
      * Two test cases return -1, two test cases return 1, and one test case returns 0
+     *
      * @param args the command line arguments
      */
     public static void main(String[] args) {

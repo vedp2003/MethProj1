@@ -5,6 +5,7 @@ import java.util.StringTokenizer;
 
 /**
  * This class creates and defines the properties of a Date object
+ *
  * @author Ved Patel, Vivek Manthri
  */
 public class Date implements Comparable<Date> {
@@ -37,6 +38,7 @@ public class Date implements Comparable<Date> {
 
     /**
      * Parameterized constructor requires 1 parameter to create a Date object
+     *
      * @param date a string of a date in the format mm/dd/yyyy
      */
     public Date(String date) {
@@ -48,19 +50,21 @@ public class Date implements Comparable<Date> {
 
     /**
      * Helper method that checks if the given year is a leap year
+     *
      * @param year the year to check
      * @return true if the given year is a leap year; false otherwise
      */
-    private boolean isLeap(int year){
+    private boolean isLeap(int year) {
         return (year % QUADRENNIAL == 0 && (year % CENTENNIAL != 0 || year % QUATERCENTENNIAL == 0));
     }
 
     /**
      * Checks if a date is a valid calendar date
+     *
      * @return true if the date is valid; false otherwise
      */
     public boolean isValid() {
-        if(this.year < 0 || this.month > NUMBER_MONTHS || this.month < 1 ||
+        if (this.year < 0 || this.month > NUMBER_MONTHS || this.month < 1 ||
                 this.day > BIG_MONTH_DAYS || this.day < 1) {
             return false;
         }
@@ -68,8 +72,7 @@ public class Date implements Comparable<Date> {
             if (this.day > SMALL_MONTH_DAYS) {
                 return false;
             }
-        }
-        else if (this.month == FEB) {
+        } else if (this.month == FEB) {
             if (!isLeap(this.year) && this.day > REG_FEB_DAYS) {
                 return false;
             }
@@ -82,6 +85,7 @@ public class Date implements Comparable<Date> {
 
     /**
      * Determines if the date is either today or in the future compared to the current date
+     *
      * @return true if the date is today or in the future; false otherwise
      */
     public boolean isTodayOrFutureDate() {
@@ -92,12 +96,13 @@ public class Date implements Comparable<Date> {
 
         return (this.year > currentYear) || (this.year == currentYear && this.month > currentMonth) ||
                 (this.year == currentYear && this.month == currentMonth && this.day > currentDay) ||
-                    ((this.year == currentYear && this.month == currentMonth && this.day == currentDay));
+                ((this.year == currentYear && this.month == currentMonth && this.day == currentDay));
 
     }
 
     /**
      * Determines if the date is before the year 1900
+     *
      * @return true if the date is before 1900; false otherwise
      */
     public boolean isBefore1900() {
@@ -106,30 +111,28 @@ public class Date implements Comparable<Date> {
 
     /**
      * Compare two Date objects based on year, month, and day
+     *
      * @param o the date object to be compared
      * @return a negative one, zero, or a positive one depending on if this date is
      * less than, equal to, or greater than the specified date
      */
     @Override
     public int compareTo(Date o) {
-        if(this.year != o.year && this.year - o.year > 0) {
+        if (this.year != o.year && this.year - o.year > 0) {
             return 1;
-        }
-        else if (this.year != o.year && this.year - o.year < 0) {
+        } else if (this.year != o.year && this.year - o.year < 0) {
             return -1;
         }
 
-        if(this.month != o.month && this.month - o.month > 0) {
+        if (this.month != o.month && this.month - o.month > 0) {
             return 1;
-        }
-        else if (this.month != o.month && this.month - o.month < 0) {
+        } else if (this.month != o.month && this.month - o.month < 0) {
             return -1;
         }
 
-        if(this.day != o.day && this.day - o.day > 0) {
+        if (this.day != o.day && this.day - o.day > 0) {
             return 1;
-        }
-        else if (this.day != o.day && this.day - o.day < 0) {
+        } else if (this.day != o.day && this.day - o.day < 0) {
             return -1;
         }
         return 0;
@@ -137,6 +140,7 @@ public class Date implements Comparable<Date> {
 
     /**
      * Return a textual representation of a Date object
+     *
      * @return a string of the format mm/dd/yyyy
      */
     @Override
@@ -147,6 +151,7 @@ public class Date implements Comparable<Date> {
     /**
      * Testbed main() for Date class, which tests the isValid() method.
      * Tests five invalid and two valid test cases
+     *
      * @param args the command line arguments
      */
     public static void main(String[] args) {

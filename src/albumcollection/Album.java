@@ -3,6 +3,7 @@ package albumcollection;
 /**
  * This class creates, defines the properties of, and manipulates an Album object.
  * Supports adding ratings and computing average ratings for an Album object
+ *
  * @author Ved Patel, Vivek Manthri
  */
 public class Album {
@@ -16,9 +17,10 @@ public class Album {
 
     /**
      * Parameterized constructor requires 4 parameters to create an album object
-     * @param title the title of the album
-     * @param artist the artist of the album
-     * @param genre the genre of the album
+     *
+     * @param title    the title of the album
+     * @param artist   the artist of the album
+     * @param genre    the genre of the album
      * @param released the release date of the album
      */
     public Album(String title, Artist artist, Genre genre, Date released) {
@@ -30,7 +32,8 @@ public class Album {
 
     /**
      * Parameterized constructor requires 2 parameters to create an album object
-     * @param title the title of the album
+     *
+     * @param title  the title of the album
      * @param artist the artist of the album
      */
     public Album(String title, Artist artist) {
@@ -40,6 +43,7 @@ public class Album {
 
     /**
      * A getter method returns the title of the album
+     *
      * @return the title of the album
      */
     public String getTitle() {
@@ -48,6 +52,7 @@ public class Album {
 
     /**
      * A getter method returns the artist of the album
+     *
      * @return the artist of the album
      */
     public Artist getArtist() {
@@ -56,6 +61,7 @@ public class Album {
 
     /**
      * A getter method returns the genre of the album
+     *
      * @return the genre of the album
      */
     public Genre getGenre() {
@@ -64,6 +70,7 @@ public class Album {
 
     /**
      * A getter method returns the release date of the album
+     *
      * @return the release date of the album in mm/dd/yyyy format
      */
     public Date getReleased() {
@@ -72,13 +79,13 @@ public class Album {
 
     /**
      * Adds a star rating to the linked list
+     *
      * @param star the star rating to add
      */
     public void rate(int star) {
         if (ratings == null) {
             ratings = new Rating(star);
-        }
-        else {
+        } else {
             Rating current = ratings;
             while (current.getNext() != null) {
                 current = current.getNext();
@@ -89,6 +96,7 @@ public class Album {
 
     /**
      * Computes the average ratings of an album
+     *
      * @return a double representing the average rating or 0.0 if there are no ratings
      */
     public double avgRatings() {
@@ -108,6 +116,7 @@ public class Album {
 
     /**
      * Determines if two Album objects are equal based on title and artist
+     *
      * @param obj the album object to be compared
      * @return true if the titles and artists of the albums are the same; false otherwise
      */
@@ -122,6 +131,7 @@ public class Album {
 
     /**
      * Return a textual representation of an Album object in a formatted manner
+     *
      * @return a formatted string with Album object parameters, asterisks to
      * display the rating scales, and average rating
      */
@@ -135,22 +145,22 @@ public class Album {
             current = current.getNext();
         }
         for (int i = 0; i < stars.length; i++) {
-                ratingsString += "*".repeat(i + 1) + "(" + stars[i] + ")";
+            ratingsString += "*".repeat(i + 1) + "(" + stars[i] + ")";
         }
         String result;
         boolean starsZeroChecker = false;
         for (int i = 0; i < MAX_STAR; i++) {
-            if(stars[i] != 0){
+            if (stars[i] != 0) {
                 starsZeroChecker = true;
+                break;
             }
         }
         if (!starsZeroChecker) {
             result = "none";
-        }
-        else {
+        } else {
             result = ratingsString + "(average rating: " + String.format("%.2f", avgRatings()) + ")";
 
         }
-        return "[" + title + "] Released " + released + " [" + artist.getName() + ":" +artist.getBorn() + "] [" + genre + "] Rating: " + result;
+        return "[" + title + "] Released " + released + " [" + artist.getName() + ":" + artist.getBorn() + "] [" + genre + "] Rating: " + result;
     }
 }
