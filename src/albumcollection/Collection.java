@@ -31,6 +31,11 @@ public class Collection {
         return size;
     }
 
+    /**
+     * A getter method returns the list of albums
+     *
+     * @return an array consisting of the list of albums
+     */
     public Album[] getAlbums() {
         return albums;
     }
