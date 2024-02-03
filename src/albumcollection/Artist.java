@@ -82,7 +82,7 @@ public class Artist implements Comparable<Artist> {
     }
 
     /**
-     * Testbed main() for Date class. Tests the compareTo() method
+     * Testbed main() for Artist class, which tests the compareTo() method.
      * Two test cases return -1, two test cases return 1, and one test case returns 0
      * @param args the command line arguments
      */

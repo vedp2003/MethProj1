@@ -1,7 +1,7 @@
 package albumcollection;
 
 /**
- * This class creates, defines the properties of, and manipulates an Album object
+ * This class creates, defines the properties of, and manipulates an Album object.
  * Supports adding ratings and computing average ratings for an Album object
  * @author Ved Patel, Vivek Manthri
  */

@@ -138,7 +138,8 @@ public class Collection {
 
 
     /**
-     * Displays all the albums in the collection sorted by genres, then artist's names, and then artist's date of births
+     * Displays all the albums in the collection sorted by genres, then artist's names,
+     * and then artist's date of births.
      * Uses insertion sort logic to order the albums
      */
     public void printByGenre() {

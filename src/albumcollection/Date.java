@@ -145,7 +145,7 @@ public class Date implements Comparable<Date> {
     }
 
     /**
-     * Testbed main() for Date class. Tests the isValid() method
+     * Testbed main() for Date class, which tests the isValid() method.
      * Tests five invalid and two valid test cases
      * @param args the command line arguments
      */

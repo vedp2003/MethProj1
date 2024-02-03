@@ -83,7 +83,7 @@ public class CollectionManager {
     }
 
     /**
-     * Adds an album to the collection and prints out corresponding message
+     * Adds an album to the collection and prints out corresponding message.
      * Verifies whether the album Dates are valid and the album exists
      * @param parts an array of strings, where each element represents a specific piece of information
      *              from the command line argument
@@ -122,7 +122,7 @@ public class CollectionManager {
     }
 
     /**
-     * Removes an album from the collection and prints out corresponding message
+     * Removes an album from the collection and prints out corresponding message.
      * Verifies whether the album actually exists
      * @param parts an array of strings, where each element represents a specific piece of information
      *              from the command line argument
@@ -147,7 +147,7 @@ public class CollectionManager {
     }
 
     /**
-     * Rates an album in the collection and prints out corresponding message
+     * Rates an album in the collection and prints out corresponding message.
      * Verifies whether the album ratings are within the 1-5 range
      * @param parts an array of strings, where each element represents a specific piece of information
      *              from the command line argument
