@@ -139,7 +139,6 @@ public class Collection {
      * Uses insertion sort logic to order the albums
      */
     public void printByDate() {
-
         for (int i = 1; i < size; i++) {
             Album key = albums[i];
             int j = i - 1;
@@ -163,7 +162,6 @@ public class Collection {
      * Uses insertion sort logic to order the albums
      */
     public void printByGenre() {
-
         for (int i = 1; i < size; i++) {
             Album key = albums[i];
             int j = i - 1;
@@ -182,7 +180,6 @@ public class Collection {
      * Uses insertion sort logic to order the albums
      */
     public void printByRating() {
-
         for (int i = 1; i < size; i++) {
             Album key = albums[i];
             int j = i - 1;
