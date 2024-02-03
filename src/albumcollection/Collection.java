@@ -109,7 +109,7 @@ public class Collection {
     }
 
     /**
-     * Displays all the albums in the collection sorted by release dates, and then titles
+     * Displays all the albums in the collection sorted by release dates, and then titles.
      * Uses insertion sort logic to order the albums
      */
     public void printByDate() {
@@ -164,7 +164,7 @@ public class Collection {
     }
 
     /**
-     * Displays all the albums in the collection sorted by average ratings, and then titles
+     * Displays all the albums in the collection sorted by average ratings, and then titles.
      * Uses insertion sort logic to order the albums
      */
     public void printByRating() {
