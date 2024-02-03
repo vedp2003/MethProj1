@@ -161,6 +161,7 @@ public class Album {
             result = ratingsString + "(average rating: " + String.format("%.2f", avgRatings()) + ")";
 
         }
-        return "[" + title + "] Released " + released + " [" + artist.getName() + ":" + artist.getBorn() + "] [" + genre + "] Rating: " + result;
+        return "[" + title + "] Released " + released + " [" + artist.getName()
+                + ":" + artist.getBorn() + "] [" + genre + "] Rating: " + result;
     }
 }
