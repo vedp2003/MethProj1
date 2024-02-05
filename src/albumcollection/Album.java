@@ -103,9 +103,9 @@ public class Album {
         if (ratings == null) {
             return 0.00;
         }
+        Rating current = ratings;
         int counter = 0;
         int total = 0;
-        Rating current = ratings;
         while (current != null) {
             total += current.getStar();
             counter++;
