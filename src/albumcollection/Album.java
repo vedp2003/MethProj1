@@ -141,7 +141,8 @@ public class Album {
         int[] stars = new int[MAX_STAR];
         Rating current = ratings;
         while (current != null) {
-            stars[current.getStar() - 1]++;
+            int starIndex = current.getStar() - 1;
+            stars[starIndex]++;
             current = current.getNext();
         }
         for (int i = 0; i < stars.length; i++) {
