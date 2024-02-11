@@ -95,7 +95,7 @@ public class Album {
     }
 
     /**
-     * Computes the average ratings of an album
+     * Computes the average ratings of an album by traversing the linked list
      *
      * @return a double representing the average rating or 0.0 if there are no ratings
      */
@@ -124,7 +124,8 @@ public class Album {
     public boolean equals(Object obj) {
         if (obj instanceof Album) {
             Album album = (Album) obj;
-            return this.title.equalsIgnoreCase(album.getTitle()) && this.artist.equals(album.getArtist());
+            return this.title.equalsIgnoreCase(album.getTitle())
+                    && this.artist.equals(album.getArtist());
         }
         return false;
     }
@@ -159,7 +160,8 @@ public class Album {
         if (!starsZeroChecker) {
             result = "none";
         } else {
-            result = ratingsString + "(average rating: " + String.format("%.2f", avgRatings()) + ")";
+            result = ratingsString + "(average rating: "
+                    + String.format("%.2f", avgRatings()) + ")";
 
         }
         return "[" + title + "] Released " + released + " [" + artist.getName()

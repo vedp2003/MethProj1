@@ -47,9 +47,9 @@ public class Collection {
      * @return the integer index of the album; -1 if not found in the list
      */
     private int find(Album album) {
-        for (int i = 0; i < size; i++) {
-            if (albums[i].equals(album)) {
-                return i;
+        for (int index = 0; index < size; index++) {
+            if (albums[index].equals(album)) {
+                return index;
             }
         }
         return NOT_FOUND;
@@ -149,10 +149,7 @@ public class Collection {
             int j = i - 1;
             while (j >= 0 && ((albums[j].getReleased().compareTo(key.getReleased()) == 1)
                     || (albums[j].getReleased().compareTo(key.getReleased()) == 0
-                    && albums[j].getTitle().compareToIgnoreCase(key.getTitle()) > 0)
-                    || (albums[j].getReleased().compareTo(key.getReleased()) == 0
-                    && albums[j].getTitle().compareToIgnoreCase(key.getTitle()) == 0
-                    && albums[j].getArtist().getName().compareToIgnoreCase(key.getArtist().getName()) > 0))) {
+                    && albums[j].getTitle().compareToIgnoreCase(key.getTitle()) > 0))) {
                 albums[j + 1] = albums[j];
                 j -= 1;
             }
