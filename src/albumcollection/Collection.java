@@ -150,11 +150,6 @@ public class Collection {
             while (j >= 0 && ((albums[j].getReleased().compareTo(key.getReleased()) == 1)
                     || (albums[j].getReleased().compareTo(key.getReleased()) == 0
                     && albums[j].getTitle().compareToIgnoreCase(key.getTitle()) > 0))) {
-                /*
-                || (albums[j].getReleased().compareTo(key.getReleased()) == 0
-                    && albums[j].getTitle().compareToIgnoreCase(key.getTitle()) == 0
-                    && albums[j].getArtist().getName().compareToIgnoreCase(key.getArtist().getName()) > 0)
-                 */
                 albums[j + 1] = albums[j];
                 j -= 1;
             }
