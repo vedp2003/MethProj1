@@ -22,20 +22,19 @@ public class CollectionManager {
     public static final int RATE_INPUT_MAX = 5;
 
     private Collection collection;
-    private Scanner scanner;
 
     /**
      * Default constructor/no-argument constructor
      */
     public CollectionManager() {
         collection = new Collection();
-        scanner = new Scanner(System.in);
     }
 
     /**
      * Runs the Collection Manager, takes in input commands, and calls the appropriate processing method
      */
     public void run() {
+        Scanner scanner = new Scanner(System.in);
         System.out.println("Collection Manager is up running.");
         String inputStr;
         while (true) {
