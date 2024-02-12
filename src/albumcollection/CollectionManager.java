@@ -186,8 +186,8 @@ public class CollectionManager {
      * Rates an album in the collection and prints out corresponding message.
      * Verifies whether the album ratings are within the 1-5 range
      *
-     * @param parts an array of strings, where each element represents a specific piece of information
-     *              from the command line argument
+     * @param parts an array of strings, where each element represents a
+     *              specific piece of information from the command line argument
      */
     private void rateAlbum(String[] parts) {
         if (parts.length < RATE_INPUT_MAX) {
